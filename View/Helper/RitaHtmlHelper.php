@@ -84,7 +84,9 @@ class RitaHtmlHelper extends HtmlHelper{
 		$onHide = $options['onHide'];
 		unset($options['onHide']);
 		
-		
+		if (is_callable($onHide)){
+			$onHide = call_user_func_array($onHide,array($url,$options));	
+		}
 		if ($onHide === true) {
 			$exit = true;
 		}
