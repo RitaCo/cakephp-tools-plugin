@@ -94,7 +94,7 @@ class EmberSerializers {
 		$out = $record[$model];
 		
 		foreach($relation as $modelName => $type ) {
-			$key =  (in_array($type, array('belongsTo')))? '_id' : '_ids';
+			$key =  (in_array($type, array('hasOne','belongsTo')))? '_id' : '_ids';
 			$key = strtolower($modelName).$key;
 			$association = $record[$modelName];
 			
@@ -114,6 +114,13 @@ class EmberSerializers {
 		$this->models[ Inflector::tableize($model)][] = $out;
 	}
 	
+/**
+ * EmberSerializers::associationsMerege()
+ * 
+ * @param mixed $name
+ * @param mixed $association
+ * @return void
+ */
 	private function associationsMerege($name,$association) {
 		$name= Inflector::tableize($name);
 		if (!isset($this->models[$name])){
@@ -132,80 +139,9 @@ class EmberSerializers {
 		}
 	}
 
-	/**
-	 * Serializers::normal()
-	 * 
-	 * @param mixed $data
-	 * @param mixed $level
-	 * @return
-	 */
-	private function relations( $data,$config){
-		$keys = (!empty($config))? array_keys($config) : array_keys($data);
-		$out =array();
-		foreach( $keys as $key){
-		  if (!is_array($data[$key]))  continue;
-		  
-		  $alias = (isset($data[$key][0]) )?  Inflector::tableize($key) : strtolower($key) ;
-		  $out[$alias] = $data[$key];  	
-		}
-		
-		return $out ;
-	}
+
 	
 	
 	
-	
-	/**
-	 * Serializers::checkConfig()
-	 * 
-	 * @param mixed $config
-	 * @return void
-	 */
-	private function checkConfig($config){
-		$config = Hash::merge($this->configDef,$config);
-		$this->include = $config['include'];
-		unset($config['include']);
-    	$this->config= $config;
-	}
 
-
-	
-	/**
-	 * Serializers::checkInclude()
-	 * 
-	 * @param mixed $include
-	 * @param bool $deep
-	 * @return
-	 */
-	private function checkInclude($include,$deep = false){
-		if (is_string($include)){
-			$include = array($include);
-		}
-		$include = Hash::normalize($include);
-
-		foreach($include as $key => $val){
-			$val = Hash::merge($this->includeDef,$val);
-			// if Embed in config is true all include array set true
-			if($this->config['embed']){
-				$val['embed'] = true;
-			}
-			if ($val['include']){
-				$val['include'] = $this->checkInclude($val['include'],true);
-			}
-			$include[$key] = $val;
-
-		}
-		
-		
-		if (!$deep){
-			$this->include = $include;
-		}
-    	return $include;
-	}
-
-
-	
-	public	function err($str){
-		return array('Error',$str);
-	}
 }
