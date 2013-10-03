@@ -6,25 +6,13 @@ DS.RESTAdapter.reopen({
 });
 
 DS.RESTSerializer.reopen({
-  normalize: function(type, hash, property) {
-    var normalized = {}, normalizedProp;
-
-    for (var prop in hash) {
-      if (prop.substr(-3) === '_id') {
-        // belongsTo relationships
-        normalizedProp = prop.slice(0, -3);
-      } else if (prop.substr(-4) === '_ids') {
-        // hasMany relationship
-        normalizedProp = Ember.String.pluralize(prop.slice(0, -4));
+   keyForRelationship: function(rel, kind) {
+      if (kind === 'belongsTo') {
+        var underscored = Ember.String.underscore(rel);
+        return underscored + '_id';
       } else {
-        // regualarAttribute
-        normalizedProp = prop;
+        var singular = Ember.String.singularize(rel);
+        return Ember.String.underscore(singular) + '_ids';
       }
-
-      normalizedProp = Ember.String.camelize(normalizedProp);
-      normalized[normalizedProp] = hash[prop];
     }
-
-    return this._super(type, normalized, property);
-  }
 });

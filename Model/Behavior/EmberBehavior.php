@@ -47,6 +47,8 @@ class EmberBehavior extends ModelBehavior {
 			} else {
 				$this->settings[$model->alias]['Ember']['auto'] = true ;
 			}
+			
+			unset($query['toEmber']);
 		}
 		return $query;
 	}	
