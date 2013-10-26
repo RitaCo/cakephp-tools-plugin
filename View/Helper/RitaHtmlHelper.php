@@ -17,10 +17,13 @@ class RitaHtmlHelper extends HtmlHelper{
 	 * @return void
 	 */
 	public function __construct(View $View, $settings = array()) {
+		
 		parent::__construct($View, $settings);
 		if (isset($settings['event'])){
 			$this->_eventConfig = array($this->_eventConfig,$settings['event']);
 		}
+		
+		$this->loadConfig('tags.php',App::pluginPath('RitaTools').'Config'.DS);
 	}
 
 
@@ -103,15 +106,17 @@ class RitaHtmlHelper extends HtmlHelper{
 	 * @param bool $exit
 	 * @return
 	 */
-	private function _onUnlink($url,$options ){
-		$onUnlink = $options['onUnlink'];
-		unset($options['onUnlink']);
+	private function _onDisabled($url,$options ){
+		$onDisabled = $options['onDisabled'];
+		unset($options['onDisabled']);
 		
 		
-		if ($onUnlink === true) {
-			$url = '#';
+		if ($onDisabled === true) {
+			$url = false;
+			$options = $this->addClass($options,'disabled');
+			$exit = true;
 		}
-		
+	
 		return array($url, $options);	
 	}
 	
@@ -135,12 +140,70 @@ class RitaHtmlHelper extends HtmlHelper{
 			list($url,$options,$exit)= $this->_onHide($url,$options);
 		}
 
-		if (isset($options['onUnlink'])){
-			list($url,$options) = $this->_onActive($url,$options);
+		if (isset($options['onDisabled'])){
+			list($url,$options) = $this->_onDisabled($url,$options);
 		}		
-		return  ($exit)? false : parent::link($title,$url,$options,$confirmMessage);
+		return  ($exit)? false : $this->_link($title,$url,$options,$confirmMessage);
 	}    
 	
+	
+		/**
+		 * RitaHtmlHelper::_link()
+		 * 
+		 * @param mixed $title
+		 * @param mixed $url
+		 * @param mixed $options
+		 * @param bool $confirmMessage
+		 * @return
+		 */
+		public function _link($title, $url = null, $options = array(), $confirmMessage = false) {
+			
+		$escapeTitle = true;
+		if($url === null) {
+			$url = $this->url($title);
+			$title = htmlspecialchars_decode($url, ENT_QUOTES);
+			$title = h(urldecode($title));
+			$escapeTitle = false;
+		} elseif($url !== false){
+			$url = $this->url($url);	
+		}
+		
+	
+
+		if (isset($options['escapeTitle'])) {
+			$escapeTitle = $options['escapeTitle'];
+			unset($options['escapeTitle']);
+		} elseif (isset($options['escape'])) {
+			$escapeTitle = $options['escape'];
+		}
+
+		if ($escapeTitle === true) {
+			$title = h($title);
+		} elseif (is_string($escapeTitle)) {
+			$title = htmlentities($title, ENT_QUOTES, $escapeTitle);
+		}
+
+		if (!empty($options['confirm'])) {
+			$confirmMessage = $options['confirm'];
+			unset($options['confirm']);
+		}
+		if ($confirmMessage) {
+			$options['onclick'] = $this->_confirm($confirmMessage, 'return true;', 'return false;', $options);
+		} elseif (isset($options['default']) && !$options['default']) {
+			if (isset($options['onclick'])) {
+				$options['onclick'] .= ' ';
+			} else {
+				$options['onclick'] = '';
+			}
+			$options['onclick'] .= 'event.returnValue = false; return false;';
+			unset($options['default']);
+		}
+
+		if ($url === false) {
+			return sprintf($this->_tags['linknohref'], $this->_parseAttributes($options), $title);
+		}		
+		return sprintf($this->_tags['link'], $url, $this->_parseAttributes($options), $title);
+	}
 
     
     
