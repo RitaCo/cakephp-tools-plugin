@@ -1,6 +1,6 @@
 [submodule "Vendor/php-browser"]
 	path = Vendor/php-browser
 	url = https://github.com/gavroche/php-browser.git
-[submodule "Vendor/Browser"]
-	path = Vendor/Browser
-	url = https://github.com/cbschuld/Browser.php.git
+[submodule "Vendor/pua"]
+	path = Vendor/pua
+	url = https://github.com/ornicar/php-user-agent.git
