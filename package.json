@@ -2,7 +2,7 @@
     "name": "RitaTools",
     "version": "0.0.1",
     "description": "Rita Tools Library.",
-    "type": "rita.core",
+    "type": "Core/Library",
     "homepage": "https://github.com/RitaCo/RitaTools",
     "author": "Mohammad Saleh Souzanchi <saleh.souzanchi@gmail.com> (http://soozanchi.ir/)",
     "contributors": [],
