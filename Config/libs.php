@@ -6,6 +6,7 @@ $config['js'] = array(
 	'jquery'    => array(
 		'filename'	=> 'jquery',
 		'cdn' 		=> '//code.jquery.com/'
+
 		'format'	=> '#NAME-#VER#Min.js'
 	),
 
@@ -19,3 +20,5 @@ $config['js'] = array(
 	),	
 );
 
+
+'''jquery|1-1-1'
