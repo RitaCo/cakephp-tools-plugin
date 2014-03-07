@@ -4,7 +4,7 @@
  */
 define('RITATOOLS_DIR', (dirname(dirname(__FILE__))) . DS );
 
-
+include RITATOOLS_DIR . 'Lib' . DS . 'Functions.php';
 App::uses('RitaTools','RitaTools.Lib');
 
 
