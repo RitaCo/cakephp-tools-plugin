@@ -24,13 +24,13 @@ class PersianFixBehavior extends ModelBehavior{
       
     }
 
-    function beforeValidate(Model $model) {
+    function beforeValidate(Model $model, $options = array()) {
       if ( !$this->__Field_IS_String() )  return false; 
       return true;
     }
 
 
-    function beforeSave(Model $model){
+    function beforeSave(Model $model, $options = array()){
         if ( !$this->__Field_IS_String() )  return false; 
         return true;
      }  
