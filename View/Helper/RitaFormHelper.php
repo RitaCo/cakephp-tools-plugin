@@ -7,6 +7,13 @@ class RitaFormHelper extends FormHelper{
     public function create($model = null, $options = array()){
     	$options['novalidate'] = true;
     	//$options = Hash::mergeDiff($options,$_options);
+    	if (empty($options['class'])){
+    		$options['class'] = 'parentInherit';
+    	} elseif (is_array($options['class'])) {
+    		$options['class'][] = 'parentInherit';
+    	} else {
+    		$options['class'] .= ' parentInherit';
+    	}
     	return parent::create($model, $options );
     }
     
