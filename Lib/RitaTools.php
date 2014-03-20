@@ -20,7 +20,22 @@ class RitaTools{
 
 
 
-
+/**
+ * RitaTools::searchNestedArray()
+ * 
+ * @param mixed $array
+ * @param mixed $search
+ * @param string $mode
+ * @return
+ */
+	function searchNestedArray(array $array, $search, $mode = 'value') {
+	
+	    foreach (new RecursiveIteratorIterator(new RecursiveArrayIterator($array)) as $key => $value) {
+	        if ($search === ${${"mode"}})
+	            return true;
+	    }
+	    return false;
+	}
 
 /**
  * RitaTools::libRepo()
