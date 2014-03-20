@@ -7,13 +7,7 @@ class RitaFormHelper extends FormHelper{
     public function create($model = null, $options = array()){
     	$options['novalidate'] = true;
     	//$options = Hash::mergeDiff($options,$_options);
-    	if (empty($options['class'])){
-    		$options['class'] = 'parentInherit';
-    	} elseif (is_array($options['class'])) {
-    		$options['class'][] = 'parentInherit';
-    	} else {
-    		$options['class'] .= ' parentInherit';
-    	}
+		$options = $this->addClass($options, 'parentInherit');
     	return parent::create($model, $options );
     }
     
@@ -118,5 +112,20 @@ $('#".$this->domId()."').slug({
 		return  ($exit)? false : parent::postLink($title,$url,$options,$confirmMessage);		
 	}    
     
+
+
+/**
+ * RitaFormHelper::submit()
+ * 
+ * @param mixed $caption
+ * @param mixed $options
+ * @return void
+ */
+	public function submit($caption = null, $options = array()) {
+		
+		$options = $this->addClass($options,'btn');
+		return parent::submit($caption, $options);
+	}    
     
+        
 }
