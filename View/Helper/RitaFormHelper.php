@@ -8,6 +8,7 @@ class RitaFormHelper extends FormHelper{
     	$options['novalidate'] = true;
     	//$options = Hash::mergeDiff($options,$_options);
 		$options = $this->addClass($options, 'parentInherit');
+		$options = $this->addClass($options, 'com-form');
     	return parent::create($model, $options );
     }
     
@@ -123,7 +124,7 @@ $('#".$this->domId()."').slug({
  */
 	public function submit($caption = null, $options = array()) {
 		
-		$options = $this->addClass($options,'btn');
+		$options = $this->addClass($options,'btn btn-action');
 		return parent::submit($caption, $options);
 	}    
     
