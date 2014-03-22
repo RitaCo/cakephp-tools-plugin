@@ -34,7 +34,7 @@ var alert = {
             dismissQueue: true,
             modal       : false,
             maxVisible  : 3,
-            timeout     : 2000,
+            timeout     : 5000,
             layout      : 'bottomRight',
             theme       : 'ritaTheme'
 		}		
@@ -44,29 +44,26 @@ var alert = {
 		l(opt);
 		opt.type = 'error';
 		opt.text = msg;
-		var n = noty(opt);
+		noty(opt);
 	},
 	info: function(msg){
 		var opt = this.options();
-		l(opt);
 		opt.type = 'information';
 		opt.text = msg;
-		 var n = noty(opt);
+		noty(opt);
 	},
 	warning: function(msg){
 		var opt = this.options();
-		l(opt);
 		opt.type = 'warning';
 		opt.text = msg;
 		
-		var n = noty(opt);
+		noty(opt);
 	},
 	success: function(msg){
 		var opt = this.options();
-		l(opt);
 		opt.type = 'success';
 		opt.text = msg;
-		 noty(opt);
+		noty(opt);
 	}
 	
 }
