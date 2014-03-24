@@ -26,7 +26,7 @@ class RitaSessionHelper extends SessionHelper {
 		$out[]= '</script>';
 		$out = implode(' ',$out);
 		
-		$this->getView()->prepend('content',$out);
+		$this->getView()->append('content',$out);
 	}
 	
 }

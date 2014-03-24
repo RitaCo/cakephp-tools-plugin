@@ -9,6 +9,7 @@ class RitaFormHelper extends FormHelper{
     	//$options = Hash::mergeDiff($options,$_options);
 		$options = $this->addClass($options, 'parentInherit');
 		$options = $this->addClass($options, 'com-form');
+		$options = $this->addClass($options, 'form-h');
     	return parent::create($model, $options );
     }
     
