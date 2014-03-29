@@ -17,6 +17,9 @@ class RitaSessionHelper extends SessionHelper {
  */
 	public function afterRender($filename) {
 		$msgs = CakeSession::read('Alerts');
+		if(empty($msgs)){
+			return;
+		}
 		$out = array();
 		$out[]= '<script type="text/javascript">';
 		foreach($msgs as $msg){
