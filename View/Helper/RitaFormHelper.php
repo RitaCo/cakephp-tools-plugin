@@ -158,6 +158,10 @@ $('#".$this->domId()."').slug({
 			$options['after'] = $after;	
 		}
 		
+		if(!empty($options['form'])){
+			$options['div'] = $options['form'];
+			unset($options['form']);
+		}
 		
 		return parent::input($fieldName, $options );
 	}
@@ -181,8 +185,9 @@ $('#".$this->domId()."').slug({
 	
 		$divOptions = array('class' => 'com-input');
 		$divOptions = $this->addClass($divOptions, $options['type']);
+		l($div);
 		if (is_string($div)) {
-			$divOptions['class'] = $div;
+			$divOptions = $this->addClass($divOptions, $div);
 		} elseif (is_array($div)) {
 			$divOptions = array_merge($divOptions, $div);
 		}
@@ -195,6 +200,7 @@ $('#".$this->domId()."').slug({
 		if (!isset($divOptions['tag'])) {
 			$divOptions['tag'] = 'div';
 		}
+		l($divOptions);
 		return $divOptions;
 	}
 	        
