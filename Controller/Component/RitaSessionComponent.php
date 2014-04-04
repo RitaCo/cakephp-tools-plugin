@@ -5,10 +5,7 @@ class RitaSessionComponent extends SessionComponent {
 
 
 	public function initialize(Controller $controller) {
-		if (!$controller->request->is('requested')) {
-			CakeSession::write('Alerts',array());
-		}
-		
+		$this->controller = $controller;
 	}
 	
 	
@@ -27,7 +24,7 @@ class RitaSessionComponent extends SessionComponent {
  * @param mixed $class
  * @return void
  */
-	private function _alert( $type, $msg  ) {
+	private function _alert( $type, $msg , $url  ) {
 			$messages = CakeSession::read('Alerts');
 		if ($messages === null){
 			$messages = array();
@@ -35,7 +32,9 @@ class RitaSessionComponent extends SessionComponent {
 		
 		$messages[] = array('type' => $type , 'msg' => $msg );
 		CakeSession::write('Alerts',$messages);
-			
+		if($url){
+			return $this->controller->redirect($url);
+		}		
 		
 	//	$this->setFlash( $msg , $element , array( 'class' => $class ,'global'=> $global ) );
 
@@ -51,24 +50,24 @@ class RitaSessionComponent extends SessionComponent {
  */
 	public function flashError($msg, $key = 'flash') {
 		
-		$this->setFlash($msg , $global, 'error',$key);
+		return $this->setFlash($msg , $global, 'error',$key);
 	}
 
 
-	public function alertInfo($msg) {
-		$this->_alert('info',$msg);
+	public function alertInfo($msg , $url = false) {
+		return	$this->_alert('info',$msg ,$url);
 	}
 
-	public function alertSuccess($msg) {
-		$this->_alert('success',$msg);
+	public function alertSuccess($msg, $url = false) {
+		return $this->_alert('success',$msg, $url);
 	}
 
-	public function alertError($msg) {
-		$this->_alert('error',$msg);
+	public function alertError($msg, $url = false) {
+		return $this->_alert('error',$msg, $url);
 	}
 
-	public function alertWarning($msg) {
-		$this->_alert('warning',$msg);
+	public function alertWarning($msg, $url = false) {
+		return $this->_alert('warning',$msg, $url);
 	}
 
 	public function __call($name, $args) {

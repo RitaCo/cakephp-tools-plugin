@@ -185,7 +185,7 @@ $('#".$this->domId()."').slug({
 	
 		$divOptions = array('class' => 'com-input');
 		$divOptions = $this->addClass($divOptions, $options['type']);
-		l($div);
+
 		if (is_string($div)) {
 			$divOptions = $this->addClass($divOptions, $div);
 		} elseif (is_array($div)) {
@@ -200,8 +200,28 @@ $('#".$this->domId()."').slug({
 		if (!isset($divOptions['tag'])) {
 			$divOptions['tag'] = 'div';
 		}
-		l($divOptions);
 		return $divOptions;
 	}
+	
+	
+	
+/**
+ * RitaFormHelper::_getFormat()
+ * 
+ * @param mixed $options
+ * @return
+ */
+	protected function _getFormat($options) {
+		if ($options['type'] === 'hidden') {
+			return array('input');
+		}
+		if (is_array($options['format']) && in_array('input', $options['format'])) {
+			return $options['format'];
+		}
+		if ($options['type'] === 'checkbox') {
+			return array('before', 'label', 'between', 'input', 'after', 'error');
+		}
+		return array('before', 'label', 'between', 'input', 'after', 'error');
+	}	
 	        
 }

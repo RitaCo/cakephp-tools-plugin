@@ -17,6 +17,7 @@ class RitaSessionHelper extends SessionHelper {
  */
 	public function afterRender($filename) {
 		$msgs = CakeSession::read('Alerts');
+		
 		if(empty($msgs)){
 			return;
 		}
@@ -30,6 +31,7 @@ class RitaSessionHelper extends SessionHelper {
 		$out = implode(' ',$out);
 		
 		$this->getView()->append('content',$out);
+		CakeSession::write('Alerts',array());
 	}
 	
 }
