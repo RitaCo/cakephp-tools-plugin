@@ -2,7 +2,10 @@
 /**
  * define path of Rita Tools
  */
-define('RITATOOLS_DIR', (dirname(dirname(__FILE__))) . DS );
+ 
+if (!defined('RITATOOLS_DIR')) {
+	define('RITATOOLS_DIR', (dirname(dirname(__FILE__))) . DS );
+}
 
 include RITATOOLS_DIR . 'Lib' . DS . 'Functions.php';
 App::uses('RitaTools','RitaTools.Lib');
