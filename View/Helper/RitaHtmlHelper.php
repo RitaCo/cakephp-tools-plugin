@@ -146,6 +146,22 @@ class RitaHtmlHelper extends HtmlHelper{
 		return  ($exit)? false : $this->_link($title,$url,$options,$confirmMessage);
 	}    
 	
+
+/**
+ * RitaHtmlHelper::linkIcon()
+ * 
+ * @param mixed $title
+ * @param mixed $url
+ * @param mixed $options
+ * @param bool $confirmMessage
+ * @return
+ */
+	public function linkIcon($title, $url = null, $options = array(), $confirmMessage = false) {
+		$title = sprintf('<i class="%s"></i>',$title);
+		$options['escapeTitle'] = false;
+		return $this->link($title, $url, $options, $confirmMessage);
+	}    
+
 	
 		/**
 		 * RitaHtmlHelper::_link()

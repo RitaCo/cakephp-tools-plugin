@@ -7,6 +7,9 @@ class RitaFormHelper extends FormHelper{
     public function create($model = null, $options = array()){
     	$options['novalidate'] = true;
     	//$options = Hash::mergeDiff($options,$_options);
+		$options = $this->addClass($options, 'parentInherit');
+		$options = $this->addClass($options, 'com-form');
+		$options = $this->addClass($options, 'form-h');
     	return parent::create($model, $options );
     }
     
@@ -111,5 +114,114 @@ $('#".$this->domId()."').slug({
 		return  ($exit)? false : parent::postLink($title,$url,$options,$confirmMessage);		
 	}    
     
+
+
+/**
+ * RitaFormHelper::submit()
+ * 
+ * @param mixed $caption
+ * @param mixed $options
+ * @return void
+ */
+	public function submit($caption = null, $options = array()) {
+		
+		$options = $this->addClass($options,'btn btn-action');
+		return parent::submit($caption, $options);
+	}    
     
+
+/**
+ * RitaFormHelper::input()
+ * 
+ * @param mixed $fieldName
+ * @param mixed $options
+ * @return void
+ */
+	public function input($fieldName, $options = array()) {
+		$rita = true;
+		if (isset($options['rita'])) {
+			$rita = $options['rita'];
+			unset($options['rita']);
+		}
+		
+		if ($rita) {
+			$before = '<div class="input-container">';
+			$after = "</div>";
+			
+			if (isset($options['before'])) {
+				$before = $options['before'].$before;
+			}
+			if (isset($options['after'])) {
+				$after = $after.$options['after'];
+			}
+			$options['before'] = $before;	
+			$options['after'] = $after;	
+		}
+		
+		if(!empty($options['form'])){
+			$options['div'] = $options['form'];
+			unset($options['form']);
+		}
+		
+		return parent::input($fieldName, $options );
+	}
+
+
+
+/**
+ * RitaFormHelper::_divOptions()
+ * 
+ * @param mixed $options
+ * @return
+ */
+	protected function _divOptions($options) {
+		if ($options['type'] === 'hidden') {
+			return array();
+		}
+		$div = $this->_extractOption('div', $options, true);
+		if (!$div) {
+			return array();
+		}
+	
+		$divOptions = array('class' => 'com-input');
+		$divOptions = $this->addClass($divOptions, $options['type']);
+
+		if (is_string($div)) {
+			$divOptions = $this->addClass($divOptions, $div);
+		} elseif (is_array($div)) {
+			$divOptions = array_merge($divOptions, $div);
+		}
+		if (
+			$this->_extractOption('required', $options) !== false &&
+			$this->_introspectModel($this->model(), 'validates', $this->field())
+		) {
+			$divOptions = $this->addClass($divOptions, 'required');
+		}
+		if (!isset($divOptions['tag'])) {
+			$divOptions['tag'] = 'div';
+		}
+		return $divOptions;
+	}
+	
+	
+	
+/**
+ * RitaFormHelper::_getFormat()
+ * 
+ * @param mixed $options
+ * @return
+ */
+	protected function _getFormat($options) {
+		if ($options['type'] === 'hidden') {
+			return array('input');
+		}
+		if (is_array($options['format']) && in_array('input', $options['format'])) {
+			return $options['format'];
+		}
+		if ($options['type'] === 'checkbox') {
+			return array('before', 'label', 'between', 'input', 'after', 'error');
+		}
+		return array('before', 'label', 'between', 'input', 'after', 'error');
+	}	
+	        
 }

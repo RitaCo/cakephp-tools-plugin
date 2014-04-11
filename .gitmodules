@@ -1,0 +1,9 @@
+[submodule "Vendor/php-browser"]
+	path = Vendor/php-browser
+	url = https://github.com/gavroche/php-browser.git
+[submodule "Vendor/pua"]
+	path = Vendor/pua
+	url = https://github.com/ornicar/php-user-agent.git
+[submodule "Vendor/ipv4"]
+	path = Vendor/ipv4
+	url = https://github.com/tapmodo/php-ipv4.git
