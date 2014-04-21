@@ -54,7 +54,7 @@ class RitaHtmlHelper extends HtmlHelper{
 		}
 		
 		$currentUrl = urldecode($this->request->here);
-		$url =  $this->url($url);
+		$url =  $this->url($url,true);
 		
 		if (!$break && ($onActive === true || $onActive === 'full') ) {
 			if ($currentUrl == $url) {
@@ -176,12 +176,12 @@ class RitaHtmlHelper extends HtmlHelper{
 			
 		$escapeTitle = true;
 		if($url === null) {
-			$url = $this->url($title);
+			$url = $this->url($title,true);
 			$title = htmlspecialchars_decode($url, ENT_QUOTES);
 			$title = h(urldecode($title));
 			$escapeTitle = false;
 		} elseif($url !== false){
-			$url = $this->url($url);	
+			$url = $this->url($url,true);	
 		}
 		
 	
