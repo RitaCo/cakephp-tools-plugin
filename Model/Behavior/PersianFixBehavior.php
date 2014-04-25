@@ -76,5 +76,11 @@ class PersianFixBehavior extends ModelBehavior{
                 chr(0xDB).chr(0x80) => chr(0xD9).chr(0x87) . chr(0xD9).chr(0x94));
        return strtr($text, $replacePairs);
    }    
+
+	function arabic2persian($string) {
+  		$arabicCharacters = array("ي","ك","‍","دِ","بِ","زِ","ذِ","ِشِ","ِسِ","‌","ى","ة");
+  		$persianCharacters = array("ی","ک","","د","ب","ز","ذ","ش","س","","ی","ه");
+  	return str_replace($arabicCharacters,$persianCharacters,$String);
+ }
     
 }
