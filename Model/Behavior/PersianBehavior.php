@@ -1,13 +1,19 @@
 <?php
 
-class PersianFixBehavior extends ModelBehavior{
+class PersianBehavior extends ModelBehavior{
     
-    var $FixFields = null;
-    var $Model = null;
-    var $StringType = array('string','text');
+    public $FixFields = null;
+    public $Model = null;
+    public $StringType = array('string','text');
     
-    function setup(Model $model , $FixFields = array() )
-    {
+/**
+ * PersianBehavior::setup()
+ * 
+ * @param mixed $model
+ * @param mixed $FixFields
+ * @return void
+ */
+    public function setup(Model $model , $FixFields = array() ) {
         
         $this->Model = $model;
         if ( !empty( $FixFields ) )
@@ -24,38 +30,58 @@ class PersianFixBehavior extends ModelBehavior{
       
     }
 
-    function beforeValidate(Model $model, $options = array()) {
+/**
+ * PersianBehavior::beforeValidate()
+ * 
+ * @param mixed $model
+ * @param mixed $options
+ * @return
+ */
+    public function beforeValidate(Model $model, $options = array()) {
       if ( !$this->__Field_IS_String() )  return false; 
       return true;
     }
 
 
-    function beforeSave(Model $model, $options = array()){
+/**
+ * PersianFixBehavior::beforeSave()
+ * 
+ * @param mixed $model
+ * @param mixed $options
+ * @return
+ */
+    public function beforeSave(Model $model, $options = array()) {
         if ( !$this->__Field_IS_String() )  return false; 
         return true;
      }  
     
     
     
-    function __Field_IS_String(){
+/**
+ * PersianBehavior::__Field_IS_String()
+ * 
+ * @return
+ */
+    protected function __Field_IS_String(){
 
-        foreach( $this->FixFields as $Field)
-            if ( !in_array( $this->Model->getColumnType( $Field ) , $this->StringType )  ){
+        foreach ($this->FixFields as $Field) {
+            if (!in_array( $this->Model->getColumnType( $Field ) , $this->StringType )) {
               trigger_error("Field {$Field} in not string type  in modal {$this->Model->alias}", E_USER_WARNING);
               return false;
-            }
-            else
-            if ( isset($this->Model->data[$this->Model->name][$Field]) and 
-                 !is_array($this->Model->data[$this->Model->name][$Field]) )
-               $this->Model->data[$this->Model->name][$Field] = $this->__fixPersianString($this->Model->data[$this->Model->name][$Field]); 
-
-            
-        return true;  
+            } elseif ( isset($this->Model->data[$this->Model->name][$Field]) and !is_array($this->Model->data[$this->Model->name][$Field])) {
+               $this->Model->data[$this->Model->name][$Field] = $this->__fixPersianString($this->Model->data[$this->Model->name][$Field]);
+			}
+		}
+		return true;  
     }
 
-
-
-    function __fixPersianString($text){
+/**
+* PersianBehavior::__fixPersianString()
+* 
+* @param mixed $text
+* @return
+*/
+   protected function __fixPersianString($text){
        
        if(is_null($text))
           return null;
@@ -77,10 +103,16 @@ class PersianFixBehavior extends ModelBehavior{
        return strtr($text, $replacePairs);
    }    
 
-	function arabic2persian($string) {
+/**
+ * PersianBehavior::arabic2persian()
+ * 
+ * @param mixed $string
+ * @return
+ */
+	public function arabic2persian($string) {
   		$arabicCharacters = array("ي","ك","‍","دِ","بِ","زِ","ذِ","ِشِ","ِسِ","‌","ى","ة");
   		$persianCharacters = array("ی","ک","","د","ب","ز","ذ","ش","س","","ی","ه");
-  	return str_replace($arabicCharacters,$persianCharacters,$String);
- }
+  		return str_replace($arabicCharacters,$persianCharacters,$String);
+ 	}
     
 }
