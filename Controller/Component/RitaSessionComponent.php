@@ -50,7 +50,7 @@ class RitaSessionComponent extends SessionComponent {
  */
 	public function flashError($msg, $key = 'flash') {
 		
-		return $this->setFlash($msg , $global, 'error',$key);
+		return $this->setFlash($msg , 'RitaTools.flash/global', array(),$key);
 	}
 
 
