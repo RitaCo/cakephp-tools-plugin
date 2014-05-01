@@ -2,7 +2,7 @@
     "name": "RitaTools",
     "version": "0.0.1",
     "description": "Rita Tools Library.",
-    "type": "Core/Library",
+    "type": "Core/Lib",
     "homepage": "https://github.com/RitaCo/RitaTools",
     "author": "Mohammad Saleh Souzanchi <saleh.souzanchi@gmail.com> (http://soozanchi.ir/)",
     "contributors": [],
@@ -14,20 +14,12 @@
     "bugs": {
         "url": "https://github.com/RitaCo/RitaTools/issues"
     },
-    "licenses" : [
-        {
-            "type" : "MIT"
-        }
-    ],
+    "licenses" : "MIT",
     "devDependencies": {
     },
     "require": {
         "php": ">=5.3.0",
-        "cakephp": "2.5.*",
-        "rita": "*"
-    },
-    "extra": {
-        "event": [],
-        "block": []
+        "rita": "7.0.0"
     }
+
 }
