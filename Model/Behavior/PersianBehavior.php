@@ -1,11 +1,17 @@
 <?php
 
+/**
+ * PersianBehavior
+ * این رفتار کننده جهت فیلتر کردن تمامی داده های فارسی برای ذخیره سازی صحیح در دیتابیس می باشد.
+ * @package RitaTools.Behavior
+ * @author Mohammad Saleh Souzanchi <Saleh.soozanchi@gmail.com>
+ * @copyright RitaCo 2014
+ * @version 0.0.1
+ * @access public
+ */
 class PersianBehavior extends ModelBehavior{
     
-    public $FixFields = null;
-    public $Model = null;
-    public $StringType = array('string','text');
-    
+   private  $runtime = array(); 
 /**
  * PersianBehavior::setup()
  * 
@@ -13,21 +19,13 @@ class PersianBehavior extends ModelBehavior{
  * @param mixed $FixFields
  * @return void
  */
-    public function setup(Model $model , $FixFields = array() ) {
-        
-        $this->Model = $model;
-        if ( !empty( $FixFields ) )
-          $this->FixFields = $FixFields;
-        else
-        {
-          $FixFields = $model->getColumnTypes();
-          foreach ( $FixFields as $Field => $type )  
-            if ( !in_array( $type , $this->StringType ) )
-               unset( $FixFields[$Field]);   
-          $this->FixFields = array_keys( $FixFields );
-        } 
-          
-      
+   	public function setup(Model $model, $config = array()) {
+      if (!isset($this->settings[$model->alias])){
+      	$this->settings[$model->alias] = array();
+      }
+	  $this->settings[$model->alias] = $config+$this->settings[$model->alias];
+	  
+	  $this->runtime[$model->alias]['fields'] = $model->getColumnTypes();   
     }
 
 /**
@@ -38,9 +36,25 @@ class PersianBehavior extends ModelBehavior{
  * @return
  */
     public function beforeValidate(Model $model, $options = array()) {
-      if ( !$this->__Field_IS_String() )  return false; 
+		$this->runtime[$model->alias]['data'] = $model->data[$model->alias];
+      	$this->_fixPresian($model);
       return true;
     }
+
+
+/**
+ * PersianBehavior::afterValidate()
+ * 
+ * @param mixed $model
+ * @return
+ */
+	public function afterValidate(Model $model) {
+		if (!empty($model->validationErrors)){
+			$model->data[$model->alias] = $this->runtime[$model->alias]['data'];
+		}
+		
+		return true;
+	}
 
 
 /**
@@ -50,13 +64,27 @@ class PersianBehavior extends ModelBehavior{
  * @param mixed $options
  * @return
  */
-    public function beforeSave(Model $model, $options = array()) {
+    public function beforeaSave(Model $model, $options = array()) {
         if ( !$this->__Field_IS_String() )  return false; 
         return true;
      }  
     
+
+
+
+	private function _fixPresian(Model $model) {
+		foreach($model->data[$model->alias] as $field => $value){
+			$model->data[$model->alias][$field] = $this->_fixField($model->alias, $field, $value);
+		}
+	}    
     
     
+	private function _fixField($model, $field , $value) {
+		$type = $this->runtime[$model]['fields'][$field];
+		
+		l($type);
+		return $value;
+	}
 /**
  * PersianBehavior::__Field_IS_String()
  * 
