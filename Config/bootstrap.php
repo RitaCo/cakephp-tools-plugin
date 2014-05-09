@@ -8,6 +8,9 @@ if (!defined('RITATOOLS_DIR')) {
 }
 
 include RITATOOLS_DIR . 'Lib' . DS . 'Functions.php';
+
+
+include RITATOOLS_DIR . 'Vendors' . DS . 'PersianTools' . DS . 'Persian.php';
 App::uses('RitaTools','RitaTools.Lib');
 
 

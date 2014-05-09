@@ -7,3 +7,6 @@
 [submodule "Vendor/ipv4"]
 	path = Vendor/ipv4
 	url = https://github.com/tapmodo/php-ipv4.git
+[submodule "Vendors/PersianTools"]
+	path = Vendors/PersianTools
+	url = https://github.com/RitaCo/PersianTools.git
