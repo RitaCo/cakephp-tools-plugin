@@ -67,20 +67,6 @@ class RitaValidatesBehavior	extends ModelBehavior {
 	}
 	
 	
-/**
- * RitaValidatesBehavior::isPersian()
- * 
- * @param mixed $model
- * @param mixed $value
- * @param mixed $options
- * @return void
- */
-	public function persianString(Model $model, $value, $options = array()) {
-		$value = current($value);
-		l($value);
-		if (is_string($value) && preg_match("/^[\p{Arabic}\s]+$/u", $value)) {
-			return true;
-		}
-		return false;
-	}		
+
+		
 }

@@ -38,6 +38,7 @@ class PersianBehavior extends ModelBehavior{
     public function beforeValidate(Model $model, $options = array()) {
 		$this->runtime[$model->alias]['data'] = $model->data[$model->alias];
       	$this->_fixPresian($model);
+      	l($model->data[$model->alias]);
       return true;
     }
 
@@ -82,7 +83,13 @@ class PersianBehavior extends ModelBehavior{
 	private function _fixField($model, $field , $value) {
 		$type = $this->runtime[$model]['fields'][$field];
 		
-		l($type);
+		switch ($type) {
+			case 'string':
+			case 'text':
+				return $this->_convertPersian4DBText($value);	
+		}
+		
+		
 		return $value;
 	}
 /**
@@ -131,16 +138,52 @@ class PersianBehavior extends ModelBehavior{
        return strtr($text, $replacePairs);
    }    
 
+
 /**
- * PersianBehavior::arabic2persian()
+ * PersianBehavior::_convertPersian4DBText()
  * 
- * @param mixed $string
+ * @param mixed $text
  * @return
  */
-	public function arabic2persian($string) {
-  		$arabicCharacters = array("ي","ك","‍","دِ","بِ","زِ","ذِ","ِشِ","ِسِ","‌","ى","ة");
-  		$persianCharacters = array("ی","ک","","د","ب","ز","ذ","ش","س","","ی","ه");
-  		return str_replace($arabicCharacters,$persianCharacters,$String);
- 	}
-    
+	protected function _convertPersian4DBText($text){
+		$text = \Persian\Convertor::arabic2persian($text);
+		$text = \Persian\Convertor::persian2englishNumbers($text);
+		return $text;
+	}
+
+
+
+/**
+ * PersianBehavior::persianString()
+ *  persianString is validator rule for persian string
+ * @param mixed $model
+ * @param mixed $value
+ * @param mixed $options
+ * @return
+ */
+	public function persianAlpha(Model $model, $value) {
+		$value = current($value);
+	
+		if (is_string($value) && preg_match("/^[\p{Arabic}\s\-]+$/u", $value)) {
+			return true;
+		}
+		return false;
+	}
+	
+/**
+ * PersianBehavior::persianAlphaNumeric()
+ * persianAlphaNumeric is validator rule for persian string
+ * @param mixed $model
+ * @param mixed $value
+ * @return
+ */
+	public function persianAlphaNumeric(Model $model, $value) {
+		$value = current($value);
+		
+		if (is_string($value) && preg_match("/^[\p{Arabic}0-9\s\-]+$/u", $value)) {
+			return true;
+		}
+		return false;
+	}
+	
 }
