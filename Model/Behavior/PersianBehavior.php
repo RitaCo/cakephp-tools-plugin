@@ -38,7 +38,6 @@ class PersianBehavior extends ModelBehavior{
     public function beforeValidate(Model $model, $options = array()) {
 		$this->runtime[$model->alias]['data'] = $model->data[$model->alias];
       	$this->_fixPresian($model);
-      	l($model->data[$model->alias]);
       return true;
     }
 
@@ -81,6 +80,9 @@ class PersianBehavior extends ModelBehavior{
     
     
 	private function _fixField($model, $field , $value) {
+		if(empty($value)){
+			return $value;
+		}
 		$type = $this->runtime[$model]['fields'][$field];
 		
 		switch ($type) {
