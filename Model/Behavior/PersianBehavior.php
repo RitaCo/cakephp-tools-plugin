@@ -164,7 +164,7 @@ class PersianBehavior extends ModelBehavior{
 	public function persianAlpha(Model $model, $value) {
 		$value = current($value);
 	
-		if (is_string($value) && preg_match("/^[\p{Arabic}\s\-]+$/u", $value)) {
+		if (is_string($value) && preg_match("/^[\p{Arabic}\x{200C}\x{200D}\s\-]+$/u", $value)) {
 			return true;
 		}
 		return false;
@@ -180,7 +180,7 @@ class PersianBehavior extends ModelBehavior{
 	public function persianAlphaNumeric(Model $model, $value) {
 		$value = current($value);
 		
-		if (is_string($value) && preg_match("/^[\p{Arabic}0-9\s\-]+$/u", $value)) {
+		if (is_string($value) && preg_match("/^[\p{Arabic}\x{200C}\x{200D}0-9\s\-]+$/u", $value)) {
 			return true;
 		}
 		return false;
