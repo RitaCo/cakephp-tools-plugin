@@ -221,8 +221,17 @@ class RitaHtmlHelper extends HtmlHelper{
 		return sprintf($this->_tags['link'], $url, $this->_parseAttributes($options), $title);
 	}
 
-    
-    
-    
-    
+/**
+ * RitaHtmlHelper::firstCrumb()
+ * 
+ * @param mixed $name
+ * @param mixed $link
+ * @param mixed $options
+ * @return
+ */
+	public function firstCrumb($name, $link = null, $options = null) {
+		array_unshift($this->_crumbs, array($name, $link, $options));
+		return $this;
+	}
+	
 }
