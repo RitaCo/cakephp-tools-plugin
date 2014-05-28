@@ -2,7 +2,15 @@
 //App::import('Core.Lib','pdate');
 App::uses('HtmlHelper','View/Helper');
 class RitaHtmlHelper extends HtmlHelper{
-    
+
+/**
+ * Breadcrumbs.
+ *
+ * @var array
+ */
+	public $_crumbs = array();
+
+
     public $_eventConfig = array(
 		'activeLink' => 'active',
 		'inlineActive' => 'inlineActive',
