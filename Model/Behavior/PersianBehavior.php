@@ -83,7 +83,12 @@ class PersianBehavior extends ModelBehavior{
 		if(empty($value)){
 			return $value;
 		}
-		$type = $this->runtime[$model]['fields'][$field];
+		
+		if(isset($this->runtime[$model]['fields'][$field])) {
+			$type = $this->runtime[$model]['fields'][$field];
+		} else {
+			$type = gettype($value);
+		}
 		
 		switch ($type) {
 			case 'string':
