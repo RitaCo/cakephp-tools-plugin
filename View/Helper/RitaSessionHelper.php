@@ -25,7 +25,7 @@ class RitaSessionHelper extends SessionHelper {
 		$out[]= '<script type="text/javascript">';
 		foreach($msgs as $msg){
 
-			$out[] = sprintf('alert.%s("%s");',$msg['type'],$msg['msg']);
+			$out[] = sprintf('Rita.Alert.%s("%s");',$msg['type'],$msg['msg']);
 		}
 		$out[]= '</script>';
 		$out = implode(' ',$out);

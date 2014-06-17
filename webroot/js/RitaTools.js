@@ -1,3 +1,7 @@
+if(!Rita) {
+	var Rita = {};
+}
+
 $.noty.defaults = {
     layout: 'top',
     theme: 'ritaTheme',
@@ -28,7 +32,7 @@ $.noty.defaults = {
 
 
 
-var alert = {
+Rita.Alert = {
 	options: function(){
 		return {
             dismissQueue: true,
@@ -41,7 +45,6 @@ var alert = {
 	},
 	error: function(msg){
 		var opt = this.options();
-		l(opt);
 		opt.type = 'error';
 		opt.text = msg;
 		noty(opt);
@@ -51,12 +54,12 @@ var alert = {
 		opt.type = 'information';
 		opt.text = msg;
 		noty(opt);
+		 
 	},
 	warning: function(msg){
 		var opt = this.options();
 		opt.type = 'warning';
 		opt.text = msg;
-		
 		noty(opt);
 	},
 	success: function(msg){
