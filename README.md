@@ -2,6 +2,7 @@
 
 some library for CakePHP by used in RitaCo Projects
 
+for CakePHP 2.6
 ----------
 
 
