@@ -1,10 +1,48 @@
 <?php
-//App::import('Core.Lib','pdate');
-App::uses('FormHelper','View/Helper');
-class RitaFormHelper extends FormHelper{
+namespace RitaTools\View\Helper;
+
+use Cake\View\Helper\FormHelper;
+use Cake\Utility\Hash;
+use Cake\View\View;
+
+class RitaFormHelper extends FormHelper {
+
+	public $helpers = ['Url'];    
+
+	protected $_ritaConfig  = [
+		'templates' => [
+			'inputContainer' => '<div class="com-input {{type}}{{required}}"><div class="input-container">{{content}}</div></div>',
+			'inputContainerError' => '<div class="com-input {{type}}{{required}} error"><div class="input-container">{{content}}{{error}}</div></div>',
+//			'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+			'submitContainer' => '<div class="submit">{{content}}</div>',
+
+		]
+	];
+
+
+
+
+/**
+ * RitaFormHelper::__construct()
+ * 
+ * @param mixed $View
+ * @param mixed $config
+ * @return void
+ */
+	public function __construct(View $View, array $config = []) {
+		$config = Hash::merge($this->_ritaConfig, $config);
+		parent::__construct($View, $config);
+		
+	}
     
-    
-    public function create($model = null, $options = array()){
+/**
+ * RitaFormHelper::create()
+ * 
+ * @param mixed $model
+ * @param mixed $options
+ * @return
+ */
+	public function create($model = null, array $options = []) {
     	$options['novalidate'] = true;
     	//$options = Hash::mergeDiff($options,$_options);
 		$options = $this->addClass($options, 'parentInherit');
@@ -13,6 +51,13 @@ class RitaFormHelper extends FormHelper{
     	return parent::create($model, $options );
     }
     
+/**
+ * RitaFormHelper::slug()
+ * 
+ * @param mixed $fieldName
+ * @param mixed $options
+ * @return
+ */
     public function slug($fieldName, $options = array() ){
         $defaults = array(
             'format' => array(
@@ -97,21 +142,22 @@ $('#".$this->domId()."').slug({
 	    
     
     
-	/**
-	 * RitaFormHelper::postLink()
-	 * 
-	 * @param mixed $title
-	 * @param mixed $url
-	 * @param mixed $options
-	 * @param bool $confirmMessage
-	 * @return void
-	 */
-	public function postLink($title, $url = null, $options = array(), $confirmMessage = false) {
+/**
+ * RitaFormHelper::postLink()
+ * 
+ * @param mixed $title
+ * @param mixed $url
+ * @param mixed $options
+ * @param bool $confirmMessage
+ * @return void
+ */
+ 
+	public function postLink($title, $url = null, array $options = array()) {
 		$exit = false;
 		if (isset($options['onHide'])){
 			list($url,$options,$exit)= $this->_onHide($url,$options);
 		}
-		return  ($exit)? false : parent::postLink($title,$url,$options,$confirmMessage);		
+		return  ($exit)? false : parent::postLink($title,$url,$options);		
 	}    
     
 
@@ -123,105 +169,13 @@ $('#".$this->domId()."').slug({
  * @param mixed $options
  * @return void
  */
-	public function submit($caption = null, $options = array()) {
+	public function submit($caption = null, array $options = []) {
 		
 		$options = $this->addClass($options,'btn btn-action');
 		return parent::submit($caption, $options);
 	}    
     
 
-/**
- * RitaFormHelper::input()
- * 
- * @param mixed $fieldName
- * @param mixed $options
- * @return void
- */
-	public function input($fieldName, $options = array()) {
-		$rita = true;
-		if (isset($options['rita'])) {
-			$rita = $options['rita'];
-			unset($options['rita']);
-		}
-		
-		if ($rita) {
-			$before = '<div class="input-container">';
-			$after = "</div>";
-			
-			if (isset($options['before'])) {
-				$before = $options['before'].$before;
-			}
-			if (isset($options['after'])) {
-				$after = $after.$options['after'];
-			}
-			$options['before'] = $before;	
-			$options['after'] = $after;	
-		}
-		
-		if(!empty($options['form'])){
-			$options['div'] = $options['form'];
-			unset($options['form']);
-		}
-		
-		return parent::input($fieldName, $options );
-	}
 
-
-
-/**
- * RitaFormHelper::_divOptions()
- * 
- * @param mixed $options
- * @return
- */
-	protected function _divOptions($options) {
-		if ($options['type'] === 'hidden') {
-			return array();
-		}
-		$div = $this->_extractOption('div', $options, true);
-		if (!$div) {
-			return array();
-		}
-	
-		$divOptions = array('class' => 'com-input');
-		$divOptions = $this->addClass($divOptions, $options['type']);
-
-		if (is_string($div)) {
-			$divOptions = $this->addClass($divOptions, $div);
-		} elseif (is_array($div)) {
-			$divOptions = array_merge($divOptions, $div);
-		}
-		if (
-			$this->_extractOption('required', $options) !== false &&
-			$this->_introspectModel($this->model(), 'validates', $this->field())
-		) {
-			$divOptions = $this->addClass($divOptions, 'required');
-		}
-		if (!isset($divOptions['tag'])) {
-			$divOptions['tag'] = 'div';
-		}
-		return $divOptions;
-	}
-	
-	
-	
-/**
- * RitaFormHelper::_getFormat()
- * 
- * @param mixed $options
- * @return
- */
-	protected function _getFormat($options) {
-		if ($options['type'] === 'hidden') {
-			return array('input');
-		}
-		if (is_array($options['format']) && in_array('input', $options['format'])) {
-			return $options['format'];
-		}
-		if ($options['type'] === 'checkbox') {
-			return array('before', 'label', 'between', 'input', 'after', 'error');
-		}
-		return array('before', 'label', 'between', 'input', 'after', 'error');
-	}	
 	        
 }

@@ -1,8 +1,12 @@
 <?php
-//App::import('Core.Lib','pdate');
-App::uses('HtmlHelper','View/Helper');
+namespace RitaTools\View\Helper;
+use Cake\View\Helper\HtmlHelper;
+
 class RitaHtmlHelper extends HtmlHelper{
 
+
+	public $helpers = ['Url'];  
+	
 /**
  * Breadcrumbs.
  *
@@ -24,14 +28,14 @@ class RitaHtmlHelper extends HtmlHelper{
 	 * @param mixed $settings
 	 * @return void
 	 */
-	public function __construct(View $View, $settings = array()) {
+	public function __cons1truct(View $View, array $config = array()) {
 		
 		parent::__construct($View, $settings);
 		if (isset($settings['event'])){
 			$this->_eventConfig = array($this->_eventConfig,$settings['event']);
 		}
 		
-		$this->loadConfig('tags.php',App::pluginPath('RitaTools').'Config'.DS);
+		//$this->loadConfig('tags.php',App::pluginPath('RitaTools').'Config'.DS);
 	}
 
 
@@ -138,7 +142,7 @@ class RitaHtmlHelper extends HtmlHelper{
 	 * @param bool $confirmMessage
 	 * @return
 	 */
-	public function link($title, $url = null, $options = array(), $confirmMessage = false) {
+	public function link($title, $url = null, array $options = array()) {		
 		$exit = false;
 		if (isset($options['onActive'])){
 			list($url,$options) = $this->_onActive($url,$options);
@@ -151,7 +155,7 @@ class RitaHtmlHelper extends HtmlHelper{
 		if (isset($options['onDisabled'])){
 			list($url,$options) = $this->_onDisabled($url,$options);
 		}		
-		return  ($exit)? false : $this->_link($title,$url,$options,$confirmMessage);
+		return  ($exit)? false : $this->_link($title,$url,$options);
 	}    
 	
 
@@ -184,17 +188,16 @@ class RitaHtmlHelper extends HtmlHelper{
 			
 		$escapeTitle = true;
 		if($url === null) {
-			$url = $this->url($title,true);
+			$url = $this->Url->build($title,true);
 			$title = htmlspecialchars_decode($url, ENT_QUOTES);
 			$title = h(urldecode($title));
 			$escapeTitle = false;
 		} elseif($url !== false){
-			$url = $this->url($url,true);	
+			$url = $this->Url->build($url,true);	
 		}
 		
 	
-
-		if (isset($options['escapeTitle'])) {
+	if (isset($options['escapeTitle'])) {
 			$escapeTitle = $options['escapeTitle'];
 			unset($options['escapeTitle']);
 		} elseif (isset($options['escape'])) {
@@ -207,26 +210,21 @@ class RitaHtmlHelper extends HtmlHelper{
 			$title = htmlentities($title, ENT_QUOTES, $escapeTitle);
 		}
 
-		if (!empty($options['confirm'])) {
+		$confirmMessage = null;
+		if (isset($options['confirm'])) {
 			$confirmMessage = $options['confirm'];
 			unset($options['confirm']);
 		}
 		if ($confirmMessage) {
 			$options['onclick'] = $this->_confirm($confirmMessage, 'return true;', 'return false;', $options);
-		} elseif (isset($options['default']) && !$options['default']) {
-			if (isset($options['onclick'])) {
-				$options['onclick'] .= ' ';
-			} else {
-				$options['onclick'] = '';
-			}
-			$options['onclick'] .= 'event.returnValue = false; return false;';
-			unset($options['default']);
 		}
 
-		if ($url === false) {
-			return sprintf($this->_tags['linknohref'], $this->_parseAttributes($options), $title);
-		}		
-		return sprintf($this->_tags['link'], $url, $this->_parseAttributes($options), $title);
+		$templater = $this->templater();
+		return $templater->format('link', [
+			'url' => $url,
+			'attrs' => $templater->formatAttributes($options),
+			'content' => $title
+		]);
 	}
 
 /**
