@@ -7,7 +7,7 @@ use Cake\View\View;
 
 class RitaFormHelper extends FormHelper {
 
-	public $helpers = ['Url'];    
+	public $helpers = ['Url','Html'];    
 
 	protected $_ritaConfig  = [
 		'templates' => [
@@ -142,16 +142,15 @@ $('#".$this->domId()."').slug({
 	    
     
     
+ 
 /**
  * RitaFormHelper::postLink()
  * 
  * @param mixed $title
  * @param mixed $url
  * @param mixed $options
- * @param bool $confirmMessage
- * @return void
+ * @return
  */
- 
 	public function postLink($title, $url = null, array $options = array()) {
 		$exit = false;
 		if (isset($options['onHide'])){
