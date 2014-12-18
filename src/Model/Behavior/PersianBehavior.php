@@ -4,6 +4,8 @@ namespace RitaTools\Model\Behavior;
 
 use Cake\Event\Event;
 use Cake\ORM\Behavior;
+use Cake\ORM\Entity;
+use Cake\ORM\Query;
 use Cake\Log\Log;
 /**
  * PersianBehavior
@@ -15,23 +17,15 @@ use Cake\Log\Log;
  * @access public
  */
 class PersianBehavior extends Behavior{
+
+protected $_defaultConfig = [
+
+];
     
-   private  $runtime = array(); 
-/**
- * PersianBehavior::setup()
- * 
- * @param mixed $model
- * @param mixed $FixFields
- * @return void
- */
-   	public function setup(Model $model, $config = array()) {
-      if (!isset($this->settings[$model->alias])){
-      	$this->settings[$model->alias] = array();
-      }
-	  $this->settings[$model->alias] = $config+$this->settings[$model->alias];
-	  
-	  $this->runtime[$model->alias]['fields'] = $model->getColumnTypes();   
-    }
+  
+ // public function initialize(array $config) {
+//         
+//    }  
 
 /**
  * PersianBehavior::beforeValidate()
@@ -61,29 +55,40 @@ class PersianBehavior extends Behavior{
 		return true;
 	}
 
+   protected function _fixPersianString($text){
+       return str_replace(["ي","ك","ى","ة"],["ی","ک","ی","ه"],$text); 
+      
+   }    
 
-/**
- * PersianFixBehavior::beforeSave()
- * 
- * @param mixed $model
- * @param mixed $options
- * @return
- */
-    public function beforseaSave(Model $model, $options = array()) {
-        if ( !$this->__Field_IS_String() )  return false; 
-        return true;
-     }  
+
+// public function slug(Entity $entity) {
+//        $config = $this->config();
+//        $value = $entity->get($config['field']);
+//        $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
+//    }
+//
+   
     
-	  public function beforeSave(Event $event, Entity $entity) {
-       debug($this->config());
+    public function beforeSave(Event $event, Entity $entity) {
+        $this->_fixEntity($entity);
+       
     }
 
 
 
-	private function _fixPresian(Model $model) {
-		foreach($model->data[$model->alias] as $field => $value){
-			$model->data[$model->alias][$field] = $this->_fixField($model->alias, $field, $value);
-		}
+	protected function _fixEntity(Entity $entity)
+    {
+	   
+        foreach($entity->toArray() as $key => $val)
+        {
+            if(is_string($val)){
+                $entity->set($key, $this->_fixPersianString($val));
+            }
+        }
+       
+//		foreach($model->data[$model->alias] as $field => $value){
+//			$model->data[$model->alias][$field] = $this->_fixField($model->alias, $field, $value);
+//		}
 	}    
     
     
@@ -131,27 +136,6 @@ class PersianBehavior extends Behavior{
 * @param mixed $text
 * @return
 */
-   protected function __fixPersianString($text){
-       
-       if(is_null($text))
-          return null;
-       $replacePairs = array(
-                chr(0xD9).chr(0xA0) => chr(0xDB).chr(0xB0),
-                chr(0xD9).chr(0xA1) => chr(0xDB).chr(0xB1),
-                chr(0xD9).chr(0xA2) => chr(0xDB).chr(0xB2),
-                chr(0xD9).chr(0xA3) => chr(0xDB).chr(0xB3),
-                chr(0xD9).chr(0xA4) => chr(0xDB).chr(0xB4),
-                chr(0xD9).chr(0xA5) => chr(0xDB).chr(0xB5),
-                chr(0xD9).chr(0xA6) => chr(0xDB).chr(0xB6),
-                chr(0xD9).chr(0xA7) => chr(0xDB).chr(0xB7),
-                chr(0xD9).chr(0xA8) => chr(0xDB).chr(0xB8),
-                chr(0xD9).chr(0xA9) => chr(0xDB).chr(0xB9),
-                chr(0xD9).chr(0x83) => chr(0xDA).chr(0xA9),
-                chr(0xD9).chr(0x89) => chr(0xDB).chr(0x8C),
-                chr(0xD9).chr(0x8A) => chr(0xDB).chr(0x8C),
-                chr(0xDB).chr(0x80) => chr(0xD9).chr(0x87) . chr(0xD9).chr(0x94));
-       return strtr($text, $replacePairs);
-   }    
 
 
 /**
