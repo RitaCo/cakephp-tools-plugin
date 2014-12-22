@@ -1,8 +1,14 @@
 <?php
 namespace RitaTools\View\Helper;
-use Cake\View\Helper\HtmlHelper;
+use Cake\View\Helper\HtmlHelper as BaseHtmlHelper;
+use Cake\Utility\Hash;
+use Cake\Core\Configure;
+use Cake\Network\Response;
+use Cake\View\Helper;
+use Cake\View\StringTemplateTrait;
+use Cake\View\View;
 
-class RitaHtmlHelper extends HtmlHelper{
+class RitaHtmlHelper extends BaseHtmlHelper{
 
 
 	public $helpers = ['Url'];  
@@ -14,29 +20,28 @@ class RitaHtmlHelper extends HtmlHelper{
  */
 	public $_crumbs = array();
 
+	protected $_ritaConfig  = [
+		'templates' => [
+			'tableheader' => '<th{{attrs}}><a href="#">{{content}}</a></th>',
+			'tableheaderrow' => '<tr{{attrs}}>{{content}}</tr>',
+			'tablecell' => '<td{{attrs}}>{{content}}</td>',
+			'tablerow' => '<tr{{attrs}}>{{content}}</tr>',
+
+		]
+	];
+
 
     public $_eventConfig = array(
 		'activeLink' => 'active',
 		'inlineActive' => 'inlineActive',
 	);
 
+	public function __construct(View $View, array $config = array()) {
+	   	$config = Hash::merge($this->_ritaConfig, $config);
+		parent::__construct($View, $config);
 
-	/**
-	 * RitaHtmlHelper::__construct()
-	 * 
-	 * @param mixed $View
-	 * @param mixed $settings
-	 * @return void
-	 */
-	public function __cons1truct(View $View, array $config = array()) {
-		
-		parent::__construct($View, $settings);
-		if (isset($settings['event'])){
-			$this->_eventConfig = array($this->_eventConfig,$settings['event']);
-		}
-		
-		//$this->loadConfig('tags.php',App::pluginPath('RitaTools').'Config'.DS);
 	}
+    
 
 
 	/**
