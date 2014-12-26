@@ -11,9 +11,9 @@ class RitaFormHelper extends FormHelper {
 
 	protected $_ritaConfig  = [
 		'templates' => [
-			'inputContainer' => '<div class="com-input {{type}}{{required}}"><div class="input-container">{{content}}</div></div>',
-			'inputContainerError' => '<div class="com-input {{type}}{{required}} error"><div class="input-container">{{content}}{{error}}</div></div>',
-//			'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+			'inputContainer' => '<div class="com-input {{type}}{{required}} {{axis}}"><div class="input-container">{{content}}</div></div>',
+			'inputContainerError' => '<div class="com-input {{type}}{{required}} error {{axis}}"><div class="input-container">{{content}}{{error}}</div></div>',
+			'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
 			'submitContainer' => '<div class="submit">{{content}}</div>',
 
 		]
