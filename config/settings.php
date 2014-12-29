@@ -2,7 +2,9 @@
 
 return [
 	'css' => [
-        'base' => [],
+        'base' => [
+            'RitaTools.cake.css'
+        ],
 		'admin' => [],
         'front' => []
 	]
