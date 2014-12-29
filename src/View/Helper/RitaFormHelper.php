@@ -10,6 +10,9 @@ class RitaFormHelper extends FormHelper {
 	public $helpers = ['Url','Html'];    
 
 	protected $_ritaConfig  = [
+        'typeMap' => [
+            	'pdate' => 'date',
+        ],
 		'templates' => [
 			'inputContainer' => '<div class="com-input {{type}}{{required}} {{axis}}"><div class="input-container">{{content}}</div></div>',
 			'inputContainerError' => '<div class="com-input {{type}}{{required}} error {{axis}}"><div class="input-container">{{content}}{{error}}</div></div>',
@@ -17,8 +20,8 @@ class RitaFormHelper extends FormHelper {
 			'submitContainer' => '<div class="submit">{{content}}</div>',
 
 		]
-	];
-
+        ];
+        
 
 
 
@@ -31,6 +34,7 @@ class RitaFormHelper extends FormHelper {
  */
 	public function __construct(View $View, array $config = []) {
 		$config = Hash::merge($this->_ritaConfig, $config);
+        $this->_defaultWidgets['pdate'] = ['\RitaTools\View\Widget\DateTimeWidget', 'select'];
 		parent::__construct($View, $config);
 		
 	}
@@ -175,6 +179,29 @@ $('#".$this->domId()."').slug({
 	}    
     
 
+	/**
+	 * RitaFormHelper::pdate()
+	 * 
+	 * @param mixed $fieldName
+	 * @param mixed $options
+	 * @return
+	 */
+	public function pdate($fieldName, array $options = []) {
+		$options += [
+			'empty' => true,
+			'value' => null,
+			'monthNames' => true,
+			'minYear' => null,
+			'maxYear' => null,
+			'orderYear' => 'desc',
+		];
+		$options['hour'] = $options['minute'] = false;
+		$options['meridian'] = $options['second'] = false;
+
+		$options = $this->_initInputField($fieldName, $options);
+		$options = $this->_datetimeOptions($options);
+		return $this->widget('datetime', $options);
+	}
 
 	        
 }
