@@ -1,11 +1,8 @@
 <?php
 namespace RitaTools\I18n;
-use Carbon\Carbon;
-use IntlDateFormatter;
-use JsonSerializable;
-use Cake\I18n\Time as CakeTime;
 
-class Time extends CakeTime{
+
+class Time extends \Cake\I18n\Time{
     
     
     public static $gregorianCalendar = false;    
@@ -19,7 +16,7 @@ class Time extends CakeTime{
 		if (is_numeric($time)) {
 			$time = '@' . $time;
 		}
-        debug($this);
+        
 		parent::__construct($time, $tz);
 	}
     
@@ -32,7 +29,7 @@ class Time extends CakeTime{
  * @param string $locale The locale name in which the date should be displayed.
  * @return string
  */
-	protected function _format1Object($date, $format, $locale) {
+	protected function _formatObject($date, $format, $locale) {
 		$pattern = $dateFormat = $timeFormat = $calendar = null;
         $calendar =  (static::$gregorianCalendar) ? \IntlDateFormatter::GREGORIAN : \IntlDateFormatter::TRADITIONAL;
         
@@ -47,6 +44,7 @@ class Time extends CakeTime{
 
 		$timezone = $date->getTimezone()->getName();
 		$key = "{$locale}.{$dateFormat}.{$timeFormat}.{$timezone}.{$calendar}.{$pattern}";
+        
 		if (!isset(static::$_formatters[$key])) {
 			static::$_formatters[$key] = datefmt_create(
 				$locale,

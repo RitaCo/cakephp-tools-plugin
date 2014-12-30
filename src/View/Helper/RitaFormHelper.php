@@ -18,7 +18,7 @@ class RitaFormHelper extends FormHelper {
 			'inputContainerError' => '<div class="com-input {{type}}{{required}} error {{axis}}"><div class="input-container">{{content}}{{error}}</div></div>',
 			'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
 			'submitContainer' => '<div class="submit">{{content}}</div>',
-
+            'dateWidget' => '<div class="dateSelect ">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
 		]
         ];
         
@@ -34,7 +34,7 @@ class RitaFormHelper extends FormHelper {
  */
 	public function __construct(View $View, array $config = []) {
 		$config = Hash::merge($this->_ritaConfig, $config);
-        $this->_defaultWidgets['pdate'] = ['\RitaTools\View\Widget\DateTimeWidget', 'select'];
+     //   $this->_defaultWidgets['pdate'] = ['\RitaTools\View\Widget\DateTimeWidget', 'select'];
 		parent::__construct($View, $config);
 		
 	}

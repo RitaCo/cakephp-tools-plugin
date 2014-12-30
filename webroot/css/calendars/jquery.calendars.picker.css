@@ -1,12 +1,12 @@
-/* Flora styling for jQuery Calendars Picker v2.0.0. */
+/* Default styling for jQuery Calendars Picker v2.0.0. */
 .calendars {
-	background-color: #e0f4d7;
+	background-color: #fff;
 	color: #000;
-	border: 1px solid #f90;
-    -moz-border-radius: 0.25em;
-    -webkit-border-radius: 0.25em;
+	border: 1px solid #EB4C35;
+    overflow: hidden;
+    display: block;
     border-radius: 0.25em;
-	font-family: Arial,Helvetica,Sans-serif;
+	font-family: wIrans,"Fire";
 	font-size: 90%;
 }
 .calendars-rtl {
@@ -23,7 +23,7 @@
 	filter: alpha(opacity=50);
 }
 .calendars a {
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 .calendars a.calendars-disabled {
@@ -33,7 +33,7 @@
 .calendars button {
     margin: 0.25em;
     padding: 0.125em 0em;
-    background-color: #fc8;
+    background-color: #fcc;
     border: none;
     -moz-border-radius: 0.25em;
     -webkit-border-radius: 0.25em;
@@ -43,22 +43,23 @@
 .calendars-nav, .calendars-ctrl {
 	float: left;
 	width: 100%;
-	background-color: #e0f4d7;
+	background-color: #E36159;
 	color: #fff;
-	font-size: 90%;
-	font-weight: bold;
+    height: 30px;
+	
+	
 }
-.datepick-ctrl {
-	background-color: #f90;
+.calendars-ctrl {
+	background-color: #600;
 }
 .calendars-cmd {
 	width: 30%;
 }
 .calendars-cmd:hover {
-	background-color: #b1db87;
+	background-color: #777;
 }
 .calendars-ctrl .calendars-cmd:hover {
-	background-color: #fa4;
+	background-color: #f08080;
 }
 .calendars-cmd-prevJump, .calendars-cmd-nextJump {
 	width: 8%;
@@ -102,7 +103,7 @@ button.calendars-cmd {
 }
 .calendars-month-nav {
 	float: left;
-	background-color: #b1db87;
+	background-color: #777;
 	text-align: center;
 }
 .calendars-month-nav div {
@@ -119,18 +120,18 @@ button.calendars-cmd {
 }
 .calendars-month {
 	float: left;
-	width: 15em;
-	border: 1px solid #83c948;
+	width: 20em;
+	border: 10px solid #e6e6e6;
 	text-align: center;
 }
 .calendars-month-header, .calendars-month-header select, .calendars-month-header input {
-	height: 1.5em;
-	background-color: #83c948;
+    
+	background-color: #4E5C6C;
 	color: #fff;
-	font-weight: bold;
+	font-weight: 400;
 }
 .calendars-month-header select, .calendars-month-header input {
-	height: 1.4em;
+	
 	border: none;
 }
 .calendars-month-header input {
@@ -140,6 +141,7 @@ button.calendars-cmd {
 .calendars-month table {
 	width: 100%;
 	border-collapse: collapse;
+    table-layout :fixed
 }
 .calendars-month thead {
 	border-bottom: 1px solid #aaa;
@@ -151,27 +153,30 @@ button.calendars-cmd {
 	text-align: center;
 }
 .calendars-month th {
-	border: 1px solid #b1db87;
+	border: 1px solid #777;
 }
 .calendars-month th, .calendars-month th a {
-	background-color: #b1db87;
-	color: #000;
-	border: 1px solid #b1db87;
+	background-color: #777;
+	color: #fff;
 }
 .calendars-month td {
-	background-color: #fff;
-	color: #666;
-	border: 1px solid #b1db87;
+	background-color: #eee;
+	border: 1px solid #aaa;
+}
+.calendars-month td.calendars-week {
+	border: 1px solid #777;
 }
 .calendars-month td.calendars-week * {
-	background-color: #b1db87;
-	color: #666;
+	background-color: #777;
+	color: #fff;
 	border: none;
 }
 .calendars-month a {
 	display: block;
 	width: 100%;
 	padding: 0.125em 0em;
+	background-color: #eee;
+	color: #000;
 	text-decoration: none;
 }
 .calendars-month span {
@@ -183,24 +188,28 @@ button.calendars-cmd {
 	color: #888;
 }
 .calendars-month td .calendars-other-month {
-	background-color: #e0f4d7;
+	background-color: #fff;
 }
 .calendars-month td .calendars-weekend {
-	background-color: #e0f4d7;
+	background-color: #ddd;
 }
 .calendars-month td .calendars-today {
-	background-color: #b1db87;
+	background-color: #f0c0c0;
 }
 .calendars-month td .calendars-highlight {
-	background-color: #fc8;
+	background-color: #f08080;
 }
 .calendars-month td .calendars-selected {
-	background-color: #f90;
+	background-color: #777;
+	color: #fff;
+}
+.calendars-month th.calendars-week {
+	background-color: #777;
 	color: #fff;
 }
 .calendars-status {
 	clear: both;
-	background-color: #b1db87;
+	background-color: #ddd;
 	text-align: center;
 }
 .calendars-clear-fix {

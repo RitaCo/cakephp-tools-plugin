@@ -8,7 +8,7 @@ class JsonType extends Type {
 
     public function toPHP($value, Driver $driver) {
         if ($value === null) {
-            return null;
+            return [];
         }
         return json_decode($value, true);
     }

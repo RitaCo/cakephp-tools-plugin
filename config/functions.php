@@ -1,4 +1,5 @@
 <?php
+use RitaTools\I18n\PStrings;
 /**
  * is_odd()
  * 
@@ -64,4 +65,19 @@ if (!function_exists('json_last_error_msg')) {
  
  
  
- 
+ if (!function_exists('p')) {
+  
+  /**
+   * p()
+   * 
+   * @param mixed $text
+   * @return
+   */
+  function p($text) {
+    
+  
+    return PStrings::Numbers2persian(h($text));
+    
+  }  
+    
+ }
