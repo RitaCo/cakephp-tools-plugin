@@ -11,10 +11,6 @@ legend {
   color:#15848F;
 }
 
-.row {
-  max-width: 80rem;
-}
-
 .actions.columns {
   margin-top:1rem;
   border-left: 5px solid #15848F;
@@ -288,69 +284,4 @@ pre {
   text-decoration: underline;
 }
 
-.home header {
-  width: 100%;
-  height: 85%;
-  position: relative;
-  display: table;
-}
 
-.home h1 {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-}
-
-.home header .header-image {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.home header h1 {
-  color: #fff;
-}
-
-.home .checks {
-  padding:30px;
-  color: #626262;
-  border-radius: 3px;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
-  margin-top:50px;
-}
-
-.checks.platform {
-  background-color: #B7E3EC;
-}
-
-.checks.filesystem {
-  background: #DCE47E;
-}
-
-.checks.database {
-  background-color: #8D6E65;
-  color: #fff;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
-}
-
-.home .checks .success:before, .home .checks .problem:before {
-  line-height: 0px;
-  font-size: 28px;
-  
-  height: 12px;
-  width: 12px;
-  border-radius: 15px;
-  text-align: center;
-  vertical-align: middle;
-  display: inline-block;
-  position: relative;
-  right: -11px;
-}
-
-.home .checks .success:before {
-  content: "✓";
-  
-}
-
-.home .checks .problem:before {
-  content: "✘";
-}
