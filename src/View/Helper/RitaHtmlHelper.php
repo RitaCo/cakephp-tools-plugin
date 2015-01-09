@@ -71,8 +71,8 @@ class RitaHtmlHelper extends BaseHtmlHelper{
 		}
 		
 		$currentUrl = urldecode($this->request->here);
-		$url =  $this->url($url,true);
-		
+		$url =  $this->Url->build($url);
+		 
 		if (!$break && ($onActive === true || $onActive === 'full') ) {
 			if ($currentUrl == $url) {
 				$options = $this->addClass($options,$this->_eventConfig['activeLink']);
@@ -149,9 +149,12 @@ class RitaHtmlHelper extends BaseHtmlHelper{
 	 */
 	public function link($title, $url = null, array $options = array()) {		
 		$exit = false;
-		if (isset($options['onActive'])){
-			list($url,$options) = $this->_onActive($url,$options);
+        
+		if (!isset($options['onActive'])){
+		    $options['onActive'] = true;
+            
 		}
+        	list($url,$options) = $this->_onActive($url,$options);
 
 		if (isset($options['onHide'])){
 			list($url,$options,$exit)= $this->_onHide($url,$options);
@@ -159,7 +162,8 @@ class RitaHtmlHelper extends BaseHtmlHelper{
 
 		if (isset($options['onDisabled'])){
 			list($url,$options) = $this->_onDisabled($url,$options);
-		}		
+		}
+        		
 		return  ($exit)? false : $this->_link($title,$url,$options);
 	}    
 	
@@ -191,6 +195,7 @@ class RitaHtmlHelper extends BaseHtmlHelper{
 		 */
 		public function _link($title, $url = null, $options = array(), $confirmMessage = false) {
 			
+         return parent::link($title, $url, $options);   
 		$escapeTitle = true;
 		if($url === null) {
 			$url = $this->Url->build($title,true);
