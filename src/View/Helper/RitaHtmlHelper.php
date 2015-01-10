@@ -26,6 +26,8 @@ class RitaHtmlHelper extends BaseHtmlHelper{
 			'tableheaderrow' => '<tr{{attrs}}>{{content}}</tr>',
 			'tablecell' => '<td{{attrs}}>{{content}}</td>',
 			'tablerow' => '<tr{{attrs}}>{{content}}</tr>',
+			'linkDisabled' => '<a {{attrs}}>{{content}}</a>'
+
 
 		]
 	];
@@ -162,8 +164,17 @@ class RitaHtmlHelper extends BaseHtmlHelper{
 
 		if (isset($options['onDisabled'])){
 			list($url,$options) = $this->_onDisabled($url,$options);
+            
 		}
-        		
+        
+        if($url === false) {
+            
+            $templater = $this->templater();
+            return $templater->format('linkDisabled', [
+                'attrs' => $templater->formatAttributes($options),
+                'content' => $title
+            ]);
+        }		  
 		return  ($exit)? false : $this->_link($title,$url,$options);
 	}    
 	
