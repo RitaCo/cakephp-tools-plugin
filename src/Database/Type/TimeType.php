@@ -19,13 +19,13 @@ namespace RitaTools\Database\Type;
  *
  * Use to convert time instances to strings & back.
  */
-class TimeType extends \Cake\Database\Type\TimeType {
+class TimeType extends \Cake\Database\Type\TimeType
+{
 
-/**
- * Time format for DateTime object
- *
- * @var string
- */
-	protected $_format = 'H:i:s';
-
+    /**
+     * Time format for DateTime object
+     *
+     * @var string
+     */
+    protected $_format = 'H:i:s';
 }

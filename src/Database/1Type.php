@@ -21,42 +21,41 @@ use PDO;
  * Encapsulates all conversion functions for values coming from database into PHP and
  * going from PHP into database.
  */
-class Type extends \Cake\Database\Type{
-s
-/**
- * List of supported database types. A human readable
- * identifier is used as key and a complete namespaced class name as value
- * representing the class that will do actual type conversions.
- *
- * @var array
- */
-	protected static $_types = [
-		'biginteger' => 'Cake\Database\Type\IntegerType',
-		'binary' => 'Cake\Database\Type\BinaryType',
-		'date' => 'RitaTools\Database\Type\DateType',
-		'float' => 'Cake\Database\Type\FloatType',
-		'decimal' => 'Cake\Database\Type\FloatType',
-		'integer' => 'Cake\Database\Type\IntegerType',
-		'time' => 'Cake\Database\Type\TimeType',
-		'datetime' => 'RitaTools\Database\Type\DateTimeType',
-		'timestamp' => 'RitaTools\Database\Type\DateTimeType',
-		'uuid' => 'Cake\Database\Type\UuidType',
-	];
+class Type extends \Cake\Database\Type
+{
+    s
+    /**
+     * List of supported database types. A human readable
+     * identifier is used as key and a complete namespaced class name as value
+     * representing the class that will do actual type conversions.
+     *
+     * @var array
+     */
+    protected static $_types = [
+    'biginteger' => 'Cake\Database\Type\IntegerType',
+    'binary' => 'Cake\Database\Type\BinaryType',
+    'date' => 'RitaTools\Database\Type\DateType',
+    'float' => 'Cake\Database\Type\FloatType',
+    'decimal' => 'Cake\Database\Type\FloatType',
+    'integer' => 'Cake\Database\Type\IntegerType',
+    'time' => 'Cake\Database\Type\TimeType',
+    'datetime' => 'RitaTools\Database\Type\DateTimeType',
+    'timestamp' => 'RitaTools\Database\Type\DateTimeType',
+    'uuid' => 'Cake\Database\Type\UuidType',
+    ];
 
-/**
- * List of basic type mappings, used to avoid having to instantiate a class
- * for doing conversion on these
- *
- * @var array
- */
-	protected static $_basicTypes = [
-		'string' => ['callback' => 'strval'],
-		'text' => ['callback' => 'strval'],
-		'boolean' => [
-			'callback' => ['\Cake\Database\Type', 'boolval'],
-			'pdo' => PDO::PARAM_BOOL
-		],
-	];
-    
-    
+    /**
+     * List of basic type mappings, used to avoid having to instantiate a class
+     * for doing conversion on these
+     *
+     * @var array
+     */
+    protected static $_basicTypes = [
+    'string' => ['callback' => 'strval'],
+    'text' => ['callback' => 'strval'],
+    'boolean' => [
+    'callback' => ['\Cake\Database\Type', 'boolval'],
+    'pdo' => PDO::PARAM_BOOL
+    ],
+    ];
 }

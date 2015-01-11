@@ -1,11 +1,11 @@
 <?php
 
 return [
-	'css' => [
+    'css' => [
         'base' => [
             'RitaTools.cake.css'
         ],
-		'admin' => [],
+        'admin' => [],
         'front' => []
-	]
+    ]
  ];
