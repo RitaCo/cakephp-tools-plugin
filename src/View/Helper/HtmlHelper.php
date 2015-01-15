@@ -1,7 +1,7 @@
 <?php
 namespace RitaTools\View\Helper;
 
-use Cake\View\Helper\HtmlHelper as BaseHtmlHelper;
+use Cake\View\Helper\HtmlHelper as CakeHtmlHelper;
 use Cake\Utility\Hash;
 use Cake\Core\Configure;
 use Cake\Network\Response;
@@ -9,7 +9,7 @@ use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
 use Cake\View\View;
 
-class RitaHtmlHelper extends BaseHtmlHelper
+class HtmlHelper extends CakeHtmlHelper
 {
 
 

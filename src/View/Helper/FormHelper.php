@@ -1,14 +1,14 @@
 <?php
 namespace RitaTools\View\Helper;
 
-use Cake\View\Helper\FormHelper;
+use Cake\View\Helper\FormHelper as CakeFormHelper;
 use Cake\Utility\Hash;
 use Cake\View\View;
 
-class RitaFormHelper extends FormHelper
+class FormHelper extends CakeFormHelper
 {
 
-    public $helpers = ['Url','Html'];
+    public $helpers = ['Url','Rita.Html'];
 
     protected $_ritaConfig  = [
         'typeMap' => [

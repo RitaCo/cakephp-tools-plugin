@@ -4,9 +4,16 @@ namespace RitaTools\View\Helper;
 
 use Cake\View\Helper;
 
-class RitaFlashHelper extends \Cake\View\Helper\FlashHelper
+class FlashHelper extends \Cake\View\Helper\FlashHelper
 {
 
+    /**
+     * FlashHelper::render()
+     * 
+     * @param string $key
+     * @param mixed $options
+     * @return
+     */
     public function render($key = 'flash', array $options = [])
     {
         if (!$this->request->session()->check("Flash.$key")) {
