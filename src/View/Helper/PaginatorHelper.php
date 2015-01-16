@@ -18,8 +18,8 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
             'counterPages' => '{{page}} of {{pages}}',
             'first' => '<li class="page-first"><a class="btn btn-action" href="{{url}}">{{text}}</a></li>',
             'last' => '<li class="page-last"><a class="btn btn-action" href="{{url}}">{{text}}</a></li>',
-            'number' => '<li><a href="{{url}}">{{text}}</a></li>',
-            'current' => '<li class="active"><a href="">{{text}}</a></li>',
+            'number' => '<a href="{{url}}"><span>{{text}}<span></a>',
+            'current' => '<a  class="active"><span>{{text}}<span></a>',
             'ellipsis' => '<li class="ellipsis">...</li>',
             'sort' => '<a href="{{url}}">{{text}}</a>',
             'sortAsc' => '<a class="asc" href="{{url}}">{{text}}</a>',
@@ -28,6 +28,31 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper
             'sortDescLocked' => '<a class="desc locked" href="{{url}}">{{text}}</a>',
         ]
     ];    
+
+    /**
+     * PaginatorHelper::numbers()
+     * 
+     * @param mixed $options
+     * @return void
+     */
+    public function numbers(array $options = [])
+    {
+          $xx = parent::numbers($options);
+          
+          $zxx = preg_replace_callback(
+                '#\>(?:([\d+]))\<#',
+                function ($matches) {
+                    $matches[1] = p($matches[1]);
+                    return ">{$matches[1]}<";
+                },
+                $xx
+            );    
+
+          
+          return $zxx;
+          debug($zxx);
+          return '';          
+    }
     
     public function PaginatorBar($model = null)
     {
