@@ -194,11 +194,11 @@ class HtmlHelper extends CakeHtmlHelper
      * @param bool $confirmMessage
      * @return
      */
-    public function linkIcon($title, $url = null, $options = array(), $confirmMessage = false)
+    public function linkIcon($title, $icon= null, $url = null, $options = array())
     {
-        $title = sprintf('<i class="%s"></i>', $title);
+        $title .= sprintf('<i class="%s"></i>', $icon);
         $options['escapeTitle'] = false;
-        return $this->link($title, $url, $options, $confirmMessage);
+        return $this->link($title, $url, $options);
     }
 
     
