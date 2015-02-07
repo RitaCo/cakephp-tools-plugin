@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\Database\Type;
+namespace Rita\Tools\Database\Type;
 
 use Cake\Database\Driver;
 use Cake\Database\Type;

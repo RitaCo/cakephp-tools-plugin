@@ -1,6 +1,5 @@
 <?php
-
-namespace RitaTools\Controller\Component;
+namespace Rita\Tools\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;

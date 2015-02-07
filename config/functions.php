@@ -1,5 +1,5 @@
 <?php
-use RitaTools\I18n\PStrings;
+use Rita\Tools\I18n\PStrings;
 
 /**
  * is_odd()

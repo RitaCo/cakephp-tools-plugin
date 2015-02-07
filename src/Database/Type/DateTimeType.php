@@ -12,7 +12,7 @@
  * @since         3.0.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace RitaTools\Database\Type;
+namespace Rita\Tools\Database\Type;
 
 use Cake\Database\Driver;
 use Cake\Database\Type\DateTimeType  as CakeDateTimeType;

@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\View\Helper;
+namespace Rita\Tools\View\Helper;
 
 use Cake\View\Helper\HtmlHelper as CakeHtmlHelper;
 use Cake\Utility\Hash;

@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\Utility;
+namespace Rita\Tools\Utility;
 /**
  * Image tool 1.3.1
  *

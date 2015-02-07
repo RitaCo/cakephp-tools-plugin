@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\I18n;
+namespace Rita\Tools\I18n;
 
 class Time extends \Cake\I18n\Time
 {

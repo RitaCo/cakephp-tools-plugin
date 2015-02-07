@@ -12,7 +12,7 @@
  * @since         3.0.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace RitaTools\View\Widget;
+namespace Rita\Tools\View\Widget;
 
 use Cake\View\Form\ContextInterface;
 use Cake\View\StringTemplate;

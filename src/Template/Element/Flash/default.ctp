@@ -5,6 +5,6 @@ if (!empty($params['class'])) {
 }
 ?>
 <div class="container">
-    <div class="<?= h($class) ?> zoomIn"><?= h($message) ?></div>
+    <div class="<?= h($class) ?> zoomIn"><?= p(h($message)) ?></div>
   
 </div>

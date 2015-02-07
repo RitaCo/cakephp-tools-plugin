@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\Utility;
+namespace Rita\Tools\Utility;
 /**
  * Resize image class will allow you to resize an image
  *

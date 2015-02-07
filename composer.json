@@ -5,7 +5,7 @@
 	"keywords": ["cakephp", "plugin", "tools"],
 	"homepage": "https://github.com/RitaCo/cakephp-users-plugin",
 	"license": "MIT",
-	"version": "3.0.1",
+	"version": "3.0.1-dev",
 	"authors": [
 		{
 			"name": "Saleh Souzanchi",
@@ -15,18 +15,16 @@
 	],
 	"require":{
 		"php": ">=5.4",
-        "cakephp/plugin-installer": "0.0.1",
 		"cakephp/cakephp": "3.0.*-dev"
 	},
 	"autoload": {
 		"psr-4": {
-			"RitaTools\\": "src"
+			"Rita\\Tools\\": "src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"RitaTools\\Test\\": "tests",
-			"Cake\\Test\\Fixture\\": "vendor/cakephp/cakephp/tests/Fixture"
+			"Rita\\Tools\\Test\\": "tests"
 		}
 	},
 	"support":{
@@ -34,6 +32,6 @@
 		"issues": "https://github.com/RitaCo/cakephp-tools-plugin/issues"
 	},
 	"extra": {
-		"installer-name": "RitaTools"
+		"installer-name": "Rita/Tools"
 	}
 }

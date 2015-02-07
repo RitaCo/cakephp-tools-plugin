@@ -12,7 +12,7 @@
  * @since         3.0.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace RitaTools\Database;
+namespace Rita\Tools\Database;
 
 use Cake\Database\Driver;
 use PDO;
@@ -34,13 +34,13 @@ class Type extends \Cake\Database\Type
     protected static $_types = [
     'biginteger' => 'Cake\Database\Type\IntegerType',
     'binary' => 'Cake\Database\Type\BinaryType',
-    'date' => 'RitaTools\Database\Type\DateType',
+    'date' => 'Rita\Tools\Database\Type\DateType',
     'float' => 'Cake\Database\Type\FloatType',
     'decimal' => 'Cake\Database\Type\FloatType',
     'integer' => 'Cake\Database\Type\IntegerType',
     'time' => 'Cake\Database\Type\TimeType',
-    'datetime' => 'RitaTools\Database\Type\DateTimeType',
-    'timestamp' => 'RitaTools\Database\Type\DateTimeType',
+    'datetime' => 'Rita\Tools\Database\Type\DateTimeType',
+    'timestamp' => 'Rita\Tools\Database\Type\DateTimeType',
     'uuid' => 'Cake\Database\Type\UuidType',
     ];
 

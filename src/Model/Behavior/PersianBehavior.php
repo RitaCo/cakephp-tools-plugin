@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\Model\Behavior;
+namespace Rita\Tools\Model\Behavior;
 
 use Cake\Event\Event;
 use Cake\ORM\Behavior;

@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\View\Helper;
+namespace Rita\Tools\View\Helper;
 
 use Cake\View\Helper\FormHelper as CakeFormHelper;
 use Cake\Utility\Hash;
@@ -36,7 +36,7 @@ class FormHelper extends CakeFormHelper
     public function __construct(View $View, array $config = [])
     {
         $config = Hash::merge($this->_ritaConfig, $config);
-        //   $this->_defaultWidgets['pdate'] = ['\RitaTools\View\Widget\DateTimeWidget', 'select'];
+        //   $this->_defaultWidgets['pdate'] = ['\Rita\Tools\View\Widget\DateTimeWidget', 'select'];
         parent::__construct($View, $config);
         
     }

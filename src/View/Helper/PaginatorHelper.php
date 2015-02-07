@@ -1,5 +1,5 @@
 <?php
-namespace RitaTools\View\Helper;
+namespace Rita\Tools\View\Helper;
 
 
 
