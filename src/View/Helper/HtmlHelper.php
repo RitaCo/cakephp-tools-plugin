@@ -196,7 +196,7 @@ class HtmlHelper extends CakeHtmlHelper
      */
     public function linkIcon($title, $icon= null, $url = null, $options = array())
     {
-        $title .= sprintf('<i class="%s"></i>', $icon);
+        $title = sprintf('<i class="%s"></i><span>%s<span>', $icon,$title);
         $options['escapeTitle'] = false;
         return $this->link($title, $url, $options);
     }
