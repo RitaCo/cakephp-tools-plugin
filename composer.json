@@ -35,6 +35,6 @@
     },
     "extra": {
         "installer-name": "Rita/Tools"
-    }
+    },
     "minimum-stability": "dev"
 }
