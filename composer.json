@@ -3,14 +3,14 @@
 	"type": "cakephp-plugin",
 	"description": "some library for CakePHP by used in RitaCo Projects.",
 	"keywords": ["cakephp", "plugin", "tools"],
-	"homepage": "https://github.com/RitaCo/cakephp-users-plugin",
+	"homepage": "https://github.com/RitaCo/cakephp-tools-plugin",
 	"license": "MIT",
 	"version": "2.5.1",
 	"authors": [
 		{
 			"name": "Saleh Souzanchi",
 			"role": "Author",
-			"homepage": "http://www.ritaco.net"
+			"homepage": "http://soozanchi.ir"
 		}
 	],
 	"require":{
