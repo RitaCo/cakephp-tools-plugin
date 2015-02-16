@@ -3,9 +3,8 @@
     "type": "cakephp-plugin",
     "description": "some library for CakePHP by used in RitaCo Projects.",
     "keywords": ["cakephp", "plugin", "tools"],
-    "homepage": "https://github.com/RitaCo/cakephp-users-plugin",
+    "homepage": "https://github.com/RitaCo/cakephp-tools-plugin",
     "license": "MIT",
-    "version": "3.0.1-dev",
     "authors": [
         {
             "name": "Saleh Souzanchi",
@@ -37,4 +36,5 @@
     "extra": {
         "installer-name": "Rita/Tools"
     }
+    "minimum-stability": "dev"
 }
