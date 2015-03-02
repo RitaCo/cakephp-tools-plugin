@@ -85,8 +85,8 @@ class PersianBehavior extends Behavior
     {
        
         foreach ($entity->toArray() as $key => $val) {
-            if (is_string($val)) {
-                $entity->set($key, $this->_fixPersianString($val));
+            if ($this->_isPersianAlpha($val)) {
+                $entity->set($key, $this->_fixPersianString($val),['setter' =>false]);
             }
         }
        
@@ -167,10 +167,8 @@ class PersianBehavior extends Behavior
      * @param mixed $options
      * @return
      */
-    public function persianAlpha(Model $model, $value)
+    public function _isPersianAlpha($value)
     {
-        $value = current($value);
-    
         if (is_string($value) && preg_match("/^[\p{Arabic}\x{200C}\x{200D}\s\-]+$/u", $value)) {
             return true;
         }
