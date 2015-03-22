@@ -32,11 +32,10 @@ class FlashHelper extends \Cake\View\Helper\FlashHelper
         $render = '';
         foreach ($flashs as $flash) {
             $flash = $options + $flash;
-         
-              $render = $render .$this->_View->element($flash['element'], $flash);
-             
+            $render = $render . $this->_View->element($flash['element'], $flash);
         }
-
         return $render;
+
     }
+
 }
