@@ -27,11 +27,10 @@ class FlashComponent extends \Cake\Controller\Component\FlashComponent
         }
     
         list($plugin, $element) = pluginSplit($options['element']);
-    
+        $options['element'] = 'Flash/' . $element;
+        
         if ($plugin) {
-            $options['element'] = $plugin . '.Flash/' . $element;
-        } else {
-            $options['element'] = 'Flash/' . $element;
+            $options['element'] = $plugin . $options['element'];
         }
     
         $session = $this->_session->read('Flash.' . $options['key']);
