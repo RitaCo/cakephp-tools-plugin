@@ -33,7 +33,7 @@ class Time extends \Cake\I18n\Time
     protected function _formatObject($date, $format, $locale)
     {
         $pattern = $dateFormat = $timeFormat = $calendar = null;
-        $calendar =  (static::$gregorianCalendar) ? \IntlDateFormatter::GREGORIAN : \IntlDateFormatter::TRADITIONAL;
+        
         
         if (is_array($format)) {
             list($dateFormat, $timeFormat) = $format;
@@ -57,7 +57,10 @@ class Time extends \Cake\I18n\Time
                 $pattern
             );
         }
-
+        if( preg_match('/(japanese|buddhist|chinese|persian|indian|islamic|hebrew|indian|coptic|ethiopic)$/',$locale)){
+            static::$_formatters[$key]->setCalendar(\IntlDateFormatter::TRADITIONAL);
+            
+        } 
         return static::$_formatters[$key]->format($date);
     }
 }
