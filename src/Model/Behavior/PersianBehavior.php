@@ -3,17 +3,17 @@ namespace Rita\Tools\Model\Behavior;
 
 use Cake\Event\Event;
 use Cake\ORM\Behavior;
-use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\Log\Log;
+use Rita\Core\ORM\Entity;
 
 /**
  * PersianBehavior
  * این رفتار کننده جهت فیلتر کردن تمامی داده های فارسی برای ذخیره سازی صحیح در دیتابیس می باشد.
- * @package RitaTools.Behavior
+ * @package Rita.Tools.Behavior
  * @author Mohammad Saleh Souzanchi <Saleh.soozanchi@gmail.com>
- * @copyright RitaCo 2014
- * @version 0.0.1
+ * @copyright RitaCo 2015
+ * @version 3.0.0
  * @access public
  */
 class PersianBehavior extends Behavior
