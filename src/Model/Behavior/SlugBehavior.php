@@ -5,8 +5,9 @@ use Cake\Event\Event;
 use Cake\ORM\Behavior;
 use Cake\ORM\Query;
 use Cake\Log\Log;
+use Cake\Utility\Inflector;
 use Rita\Core\ORM\Entity;
-
+use Rita\Tools\I18n\PStrings;
 /**
  * SluggableBehavior
  * این رفتار کننده برای ساخت آدرس‌های اینترنتی فارسی مورد استفاده قرار می‌گیرد.
@@ -86,8 +87,7 @@ class SlugBehavior extends Behavior {
             
         }
         
-        //$entity->log('ddddd','debug');
-        Log::debug('debug', 'aaaaaaaaaaa');
+
         $value = $this->persianSlug($value, $config['replacement']);
             
         $entity->set($config['slug'],$value);
@@ -102,12 +102,17 @@ class SlugBehavior extends Behavior {
 	 * @return
 	 */
 	public function persianSlug($string, $replacement = '-') {
-		$special_chars = array("?", "[", "]", "/", "\\", "=", "<", ">", ":", ";", ",", "'","\"", "&", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}", chr(0));
-		$string = str_replace($special_chars, '', $string);
-		$string = preg_replace('/[\s-]+/', $replacement, $string);
-		$string = trim($string, '.-_');
+	   $string = Inflector::slug($string, $replacement);
+         $string = $this->_fixPersianString($string);   
+         $string = PStrings::persian2englishNumbers($string);
+         $string = PStrings::arabic2englishNumbers($string);
 		return $string;
 	}
 
+
+    protected function _fixPersianString($text)
+    {
+        return str_replace(["ي","ك","ى","ة"], ["ی","ک","ی","ه"], $text);
+    }
 
 }

@@ -131,4 +131,18 @@ class PStrings
         }
         return str_replace(self::$persian_numbers, self::$english_numbers, $text);
     }
+    
+    /**
+     * PStrings::persian2englishNumbers()
+     * 
+     * @param mixed $text
+     * @return
+     */
+    public static function arabic2englishNumbers($text)
+    {
+        if (!is_string($text) || empty($text)) {
+            return false;
+        }
+        return str_replace(self::$arabic_numbers, self::$english_numbers, $text);
+    }    
 }
