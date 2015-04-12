@@ -1,7 +1,7 @@
 <?php
 namespace Rita\Tools\Utility;
 /**
- * Image tool 1.3.1
+ * Image tool 1.4.0
  *
  * Different tools/functions to perform various tasks w/ images
  */
@@ -199,10 +199,9 @@ class ImageTool {
 	 * - 'units' Scale units. Percents ('%') and pixels ('px') are avalaible
 	 * - 'enlarge' if set to false and width or height of the destination image is bigger than source image's width or height, then leave source image's dimensions untouched
 	 * - 'chmod' What permissions should be applied to destination image
-	 * - 'keepRatio' If true and both output width and height is specified and crop is set to false, image is resized with respect to it's original ratio. If false (default), image is simple scaled.
-	 * - 'paddings' If not empty and both output width and height is specified and keepRatio is set to true, padding borders are applied. You can specify color here. If true, then white color will be applied
+	 * - 'paddings' If not empty and both output width and height is specified and mode=fit, padding borders are applied. You can specify color here. If true, then white color will be applied
+	 * - 'mode' How to handle image size. Possible options: crop, fit and stretch
 	 * - 'afterCallbacks' Functions to be executed after resize. Example: [['unsharpMask', 70, 3.9, 0]]; First passed argument is f-ion name. Executed function's first argument must be gd image instance
-	 * - 'crop' If true (default) crop excess portions of image to fit in specified size
 	 * - 'height' Output image's height. If left empty, this is auto calculated (if possible)
 	 * - 'width' Output image's width. If left empty, this is auto calculated (if possible)
 	 *
@@ -213,17 +212,16 @@ class ImageTool {
 		$options = array_merge([
 			'afterCallbacks' => null,
 			'compression' => null,
-			'keepRatio' => false,
-			'paddings' => true,
+			'paddings' => false,
 			'enlarge' => true,
 			'quality' => null,
 			'chmod' => null,
+			'mode' => 'crop',
 			'units' => 'px',
 			'height' => null,
 			'output' => null,
 			'width' => null,
-			'input' => null,
-			'crop' => true
+			'input' => null
 		], $options);
 
 		// if output path (directories) doesn't exist, try to make whole path
@@ -266,9 +264,8 @@ class ImageTool {
 			}
 		}
 
-		// if keepRatio is set to true, check output width/height and update them
-		// as neccessary
-		if ($options['keepRatio'] && $options['width'] != null && $options['height'] != null) {
+		// if mode=fit, check output width/height and update them  as neccessary
+		if ($options['mode'] === 'fit' && $options['width'] != null && $options['height'] != null) {
 			$input_ratio = $input_width / $input_height;
 			$output_ratio = $options['width'] / $options['height'];
 
@@ -300,7 +297,7 @@ class ImageTool {
 		if ($options['enlarge'] == false && ($options['width'] > $input_width || $options['height'] > $input_height)) {
 			$options['width'] = $input_width;
 			$options['height'] = $input_height;
-		} else if ($options['crop'] == true) {
+		} else if ($options['mode'] === 'crop') {
 			if (($input_width / $input_height) > ($options['width'] / $options['height'])) {
 				$ratio = $input_height / $options['height'];
 				$src_w = $ratio * $options['width'];
@@ -317,7 +314,13 @@ class ImageTool {
 		$is_same_type = $input_extension === $output_extension;
 		$is_same_size = $input_width === $options['width'] && $input_height === $options['height'];
 		if ($is_same_size && $is_same_type && $is_local && empty($options['afterCallbacks'])) {
-			return copy($options['input'], $options['output']);
+			$r = copy($options['input'], $options['output']);
+
+			if (!empty($options['chmod'])) {
+				chmod($options['output'], $options['chmod']);
+			}
+
+			return $r;
 		}
 
 		$dst_im = imagecreatetruecolor($options['width'], $options['height']);
@@ -347,7 +350,7 @@ class ImageTool {
 			return false;
 		}
 
-		if ($options['keepRatio'] && $options['paddings']) {
+		if ($options['mode'] === 'fit' && $options['paddings']) {
 			if ($options['width'] != $original_width || $options['height'] != $original_height) {
 				$bg_im = imagecreatetruecolor($original_width, $original_height);
 
