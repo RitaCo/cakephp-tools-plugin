@@ -61,9 +61,11 @@ class BowerShell extends Shell {
 		if ($pluginName == '.') {
 			// install ALL
 			$dependencies = $this->_getDependencies(WWW_ROOT);
+            
 			foreach (Plugin::loaded() as $plugin) {
 				$dependencies = $this->_getDependencies(Plugin::path($plugin), $dependencies);
 			}
+            debug($dependencies);
 		} elseif (strtolower($pluginName) == 'app') {
 			// install App only
 			$path = APP;
@@ -118,7 +120,7 @@ class BowerShell extends Shell {
 		if (isset($rc['json'])) {
 			$jsonPath = $path . $rc['json'];
 		}
-    
+         debug($jsonPath);
 		if (file_exists($jsonPath)) {
 			$json = json_decode(file_get_contents($jsonPath), true);
 			if (isset($json['dependencies']) && is_array($json['dependencies'])) {
