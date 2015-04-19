@@ -214,7 +214,22 @@ class HtmlHelper extends CakeHtmlHelper
         $options = $this->addClass($options, 'btn');
         return  $this->link($title, $url, $options);
     }
-    
+ 
+    /**
+     * HtmlHelper::bottunIcon()
+     * 
+     * @param mixed $title
+     * @param mixed $icon
+     * @param mixed $url
+     * @param mixed $options
+     * @return
+     */
+    public function bottunIcon($title,$icon = null, $url = null, $options = array())
+    {
+        $options = $this->addClass($options, 'btn');
+        
+        return  $this->linkIcon($title,$icon, $url, $options);
+    }    
     /**
      * RitaHtmlHelper::_link()
      *
