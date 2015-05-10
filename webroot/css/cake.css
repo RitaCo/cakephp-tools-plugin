@@ -168,6 +168,9 @@ p.notice {
   z-index: 9999;
   padding: 7px 14px;
   border-radius: 3px;
+//  position: absolute;
+  overflow: scroll;
+  max-width: 60vw;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
 }
 
@@ -176,6 +179,8 @@ p.notice {
 p.notice {
   color: #000000;
   background: #ffcc00;
+  position: relative;
+  overflow: auto;
 }
 
 .cake-error,

@@ -19,7 +19,7 @@ class FormHelper extends CakeFormHelper
     'inputContainerError' => '<div class="com-input {{type}}{{required}} error {{axis}}"><div class="input-container">{{content}}{{error}}</div></div>',
     'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
     'submitContainer' => '<div class="submit">{{content}}</div>',
-            'dateWidget' => '<div class="dateSelect ">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
+    'dateWidget' => '<div class="dateSelect">{{localization}}{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
     ]
         ];
         

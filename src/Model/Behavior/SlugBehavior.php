@@ -64,9 +64,9 @@ class SlugBehavior extends Behavior {
 
         $fieldValue = $entity->get($config['field']);
         $slugValue  = $entity->get($config['slug']);
-        
+  
         if ($entity->isNew()){
-                 
+
             if( empty($slugValue)){
                 $value = $fieldValue;
             } else {
@@ -74,7 +74,7 @@ class SlugBehavior extends Behavior {
             }
             
         } else {
-            if (!$entity->dirty($config['slug'])){
+            if (!$entity->dirty($config['slug']) && !empty($slugValue)){
               return;   
             }
 
