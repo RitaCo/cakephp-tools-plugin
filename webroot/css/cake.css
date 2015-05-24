@@ -199,6 +199,7 @@ pre {
 
 .cake-error .cake-stack-trace {
   margin-top:10px;
+  direction: ltr;
 }
 
 .cake-stack-trace code {

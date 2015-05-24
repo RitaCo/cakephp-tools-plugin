@@ -6,7 +6,7 @@ use Cake\ORM\Behavior;
 use Cake\ORM\Query;
 use Cake\Log\Log;
 use Cake\Utility\Inflector;
-use Rita\Core\ORM\Entity;
+use Cake\ORM\Entity;
 use Rita\Tools\I18n\PStrings;
 /**
  * SluggableBehavior
@@ -55,7 +55,7 @@ class SlugBehavior extends Behavior {
      * @param mixed $entity
      * @return
      */
-    public function beforeSave(Event $event, Entity $entity) {
+    public function beforeSave(Event $event, Entity $entity, \ArrayObject $options) {
                 $config = $this->config();
         if (!$this->_table->hasField($config['slug'])) {
             return;   

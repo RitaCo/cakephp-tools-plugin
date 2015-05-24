@@ -19,7 +19,7 @@ class FormHelper extends CakeFormHelper
     'inputContainerError' => '<div class="com-input {{type}}{{required}} error {{axis}}"><div class="input-container">{{content}}{{error}}</div></div>',
     'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
     'submitContainer' => '<div class="submit">{{content}}</div>',
-    'dateWidget' => '<div class="dateSelect">{{localization}}{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
+    'dateWidget' => '<div class="dateSelect">{{day}}{{month}}{{year}}{{localization}} <div class="divider"></div> {{hour}}{{minute}}{{second}}{{meridian}}</div>',
     ]
         ];
         
@@ -186,28 +186,4 @@ $('#".$this->domId()."').slug({
     }
     
 
-    /**
-     * RitaFormHelper::pdate()
-     *
-     * @param mixed $fieldName
-     * @param mixed $options
-     * @return
-     */
-    public function pdate($fieldName, array $options = [])
-    {
-        $options += [
-        'empty' => true,
-        'value' => null,
-        'monthNames' => true,
-        'minYear' => null,
-        'maxYear' => null,
-        'orderYear' => 'desc',
-        ];
-        $options['hour'] = $options['minute'] = false;
-        $options['meridian'] = $options['second'] = false;
-
-        $options = $this->_initInputField($fieldName, $options);
-        $options = $this->_datetimeOptions($options);
-        return $this->widget('datetime', $options);
-    }
 }

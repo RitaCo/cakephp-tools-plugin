@@ -5,7 +5,7 @@ use Cake\Event\Event;
 use Cake\ORM\Behavior;
 use Cake\ORM\Query;
 use Cake\Log\Log;
-use Rita\Core\ORM\Entity;
+use Cake\ORM\Entity;
 
 /**
  * PersianBehavior
